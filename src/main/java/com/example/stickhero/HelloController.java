@@ -6,11 +6,24 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
+import javafx.scene.image.ImageView;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.io.IOException;
 
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.shape.Rectangle;
+import javafx.scene.Node;
+import javafx.scene.Parent;
 public class HelloController {
     private Stage stage;
     private Scene scene;
@@ -21,7 +34,7 @@ public class HelloController {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setWidth(600);
-        stage.setHeight(518);
+        stage.setHeight(400);
         stage.setScene(scene);
         stage.show();
     }
@@ -55,4 +68,19 @@ public class HelloController {
         stage.setScene(scene);
         stage.show();
     }
+    @FXML
+    private ImageView mainscreen;
+    public void setMainWindow(Stage stage) {
+        this.stage = stage;
+    }
+    private void initialize(){
+        mainscreen.setImage(new Image(getClass().getResourceAsStream("src/images/startscreen.png")));
+    }
+
+
+    //mainscreen.setImage(new void Image(getClass();
+    //void getResourceAsStream("C:\Users\swarnima prasad\OneDrive\Desktop\StickHero\src\images\startscreen.png")));
+   // mainscreen.setImage(new Image(getClass().
+
+   // void getResourceAsStream("C:\Users\swarnima prasad\OneDrive\Desktop\StickHero\src\images\startscreen.png")));
 }
