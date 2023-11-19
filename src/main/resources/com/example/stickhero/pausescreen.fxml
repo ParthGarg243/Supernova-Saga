@@ -14,7 +14,7 @@
    <children>
       <ImageView fitHeight="420.0" fitWidth="632.0" layoutX="-24.0" layoutY="-8.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../images/Screenshot%202023-11-19%20110704.png" />
+            <Image url="@../../../../../images/resumebackground.png" />
          </image>
       </ImageView>
       <VBox alignment="BASELINE_CENTER" layoutX="208.0" layoutY="47.0" prefHeight="206.0" prefWidth="191.0">
