@@ -27,7 +27,7 @@
       </ImageView>
       <ImageView fitHeight="10.0" fitWidth="288.0" layoutX="210.0" layoutY="345.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../../images/Rectangle%207stick.png" />
+            <Image url="@../../../../../images/stick.png" />
          </image>
       </ImageView>
       <ImageView fitHeight="40.0" fitWidth="16.0" layoutX="370.0" layoutY="307.0" pickOnBounds="true" preserveRatio="true">
@@ -45,7 +45,7 @@
             <Image url="@../../../../../images/Groupstar.png" />
          </image>
       </ImageView>
-      <Button layoutX="600.0" layoutY="32.0" minWidth="43.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="43.0" style="-fx-background-image: ..\..\..\..\..\images\Play.png;" textFill="WHITE">
+      <Button layoutX="600.0" layoutY="32.0" minWidth="43.0" mnemonicParsing="false" prefHeight="46.0" prefWidth="43.0" textFill="WHITE">
          <font>
             <Font name="Segoe Print" size="96.0" />
          </font>
