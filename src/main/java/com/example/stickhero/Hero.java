@@ -14,4 +14,8 @@ public class Hero extends Solid{
     public void move(){}
 
     public void changePlatform(){}
+
+    public void flip(){}
+
+    public void revive(){}
 }

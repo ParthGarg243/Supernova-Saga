@@ -8,4 +8,6 @@ public class Platform extends Solid{
     public Platform(float length, float width, float xCoord, float yCoord) {
         super(length, width, xCoord, yCoord);
     }
+
+    public void generateRedArea(){}
 }
