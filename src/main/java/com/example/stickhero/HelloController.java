@@ -76,11 +76,4 @@ public class HelloController {
     private void initialize(){
         mainscreen.setImage(new Image(getClass().getResourceAsStream("src/images/startscreen.png")));
     }
-
-
-    //mainscreen.setImage(new void Image(getClass();
-    //void getResourceAsStream("C:\Users\swarnima prasad\OneDrive\Desktop\StickHero\src\images\startscreen.png")));
-   // mainscreen.setImage(new Image(getClass().
-
-   // void getResourceAsStream("C:\Users\swarnima prasad\OneDrive\Desktop\StickHero\src\images\startscreen.png")));
 }
