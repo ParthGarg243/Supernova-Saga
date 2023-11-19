@@ -14,32 +14,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) throws IOException {
-        Group root = new Group();
-//        Image icon = new Image("logo.png");
-        Scene scene = new Scene(root, Color.BLACK);
-//        stage.getIcons().add(icon);
-        stage.setTitle("Stick Hero");
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("hello-view.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
+        stage.setTitle("Hello!");
         stage.setScene(scene);
-        stage.setHeight(716);
-        stage.setWidth(500);
-        stage.setResizable(false);
         stage.show();
     }
 
     public static void main(String[] args) {
-        launch(args);
+        launch();
     }
-
-//    @Override
-//    public void start(Stage stage) throws IOException {
-//        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("GameScreen.fxml"));
-//        Scene scene = new Scene(fxmlLoader.load(), 320, 240);
-//        stage.setTitle("Hello!");
-//        stage.setScene(scene);
-//        stage.show();
-//    }
-//
-//    public static void main(String[] args) {
-//        launch();
-//    }
 }
