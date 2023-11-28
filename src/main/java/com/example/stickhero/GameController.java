@@ -16,7 +16,8 @@ public class GameController {
     private Scene scene;
     private Parent root;
     private Hero myHero = new Hero(60, 45, 25, 400);
-    private Platform currentPlatform = new Platform();
+    private Platform currentPlatform = new Platform(200, 102, 0, 455);
+    private Platform nextPlatform = new Platform(197, 57, 243, 453);
 
     public void switchToStartScreen(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
