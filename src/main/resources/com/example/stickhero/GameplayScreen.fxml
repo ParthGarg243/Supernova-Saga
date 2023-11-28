@@ -4,12 +4,16 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="650.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickhero.GameController">
    <children>
       <ImageView fitHeight="660.0" fitWidth="410.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/GamePlayBG.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="myHero" fitHeight="60.0" fitWidth="45.0" layoutX="25.0" layoutY="400.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Hero.png" />
          </image>
       </ImageView>
    </children>
