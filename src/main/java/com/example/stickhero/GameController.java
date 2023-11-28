@@ -24,7 +24,7 @@ import javafx.scene.control.Label;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.Node;
 import javafx.scene.Parent;
-public class HelloController {
+public class GameController {
     private Stage stage;
     private Scene scene;
     private Parent root;
@@ -45,21 +45,6 @@ public class HelloController {
         stage.show();
     }
 
-    public void switchToGameOverScreen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("gameoverscreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    public void switchToPauseScreen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("pausescreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
-        scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
-    }
     @FXML
     private ImageView mainscreen;
     public void setMainWindow(Stage stage) {
