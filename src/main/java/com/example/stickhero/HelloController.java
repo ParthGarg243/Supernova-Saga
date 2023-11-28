@@ -30,21 +30,17 @@ public class HelloController {
     private Parent root;
 
     public void switchToStartScreen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("startscreen.fxml"));
+        root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        stage.setWidth(600);
-        stage.setHeight(400);
         stage.setScene(scene);
         stage.show();
     }
 
     public void switchToGameScreen(ActionEvent event) throws IOException {
-        root = FXMLLoader.load(getClass().getResource("hello-view.fxml"));
+        root = FXMLLoader.load(getClass().getResource("GameplayScreen.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        stage.setWidth(600);
-        stage.setHeight(518);
         stage.setScene(scene);
         stage.show();
     }
@@ -53,8 +49,6 @@ public class HelloController {
         root = FXMLLoader.load(getClass().getResource("gameoverscreen.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        stage.setWidth(600);
-        stage.setHeight(518);
         stage.setScene(scene);
         stage.show();
     }
@@ -63,8 +57,6 @@ public class HelloController {
         root = FXMLLoader.load(getClass().getResource("pausescreen.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        stage.setWidth(600);
-        stage.setHeight(518);
         stage.setScene(scene);
         stage.show();
     }

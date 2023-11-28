@@ -28,14 +28,16 @@ public class Main extends Application {
 //        stage.setScene(scene);
 //        stage.show();
 //    }
-@Override
+    private Hero hero = new Hero(60,45,25, 400);
+
+    @Override
     public void start(Stage primaryStage) throws Exception {
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("startscreen.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("HomePage.fxml"));
         Parent root = loader.load();
         HelloController controller = loader.getController();
         controller.setMainWindow(primaryStage);
         primaryStage.setTitle("stickhero");
-        primaryStage.setScene(new Scene(root,800, 600));
+        primaryStage.setScene(new Scene(root,406, 650));
         primaryStage.show();
     }
     public static void main(String[] args) {
