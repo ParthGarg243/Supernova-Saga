@@ -1,14 +1,5 @@
-package com.example.stickhero;//package com.example.stickhero;
-//
-//import javafx.application.Application;
-//import javafx.fxml.FXMLLoader;
-//import javafx.scene.Group;
-//import javafx.scene.Scene;
-//import javafx.scene.image.Image;
-//import javafx.scene.paint.Color;
-//import javafx.stage.Stage;
-//
-//import java.io.IOException;
+package com.example.stickhero;
+
 import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
