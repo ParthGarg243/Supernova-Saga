@@ -131,6 +131,8 @@ public class GameController {
 
         // Set the destination X coordinate (adjust as needed)
         double destinationX = nextPlatform.getLayoutX() - nextPlatform.getWidth() / 2;
+//        double destinationX = heroImage.getLayoutX() - stick.getEndY() - heroImage.getFitWidth()/2;
+
 
         // Set the destination Y coordinate (same as the current position)
         double destinationY = heroImage.getTranslateY();
