@@ -20,7 +20,7 @@ public class Main extends Application {
         GameController controller = loader.getController();
         Scene scene = new Scene(root, 406, 650);
         controller.setMainWindow(primaryStage);
-        primaryStage.setTitle("stickhero");
+        primaryStage.setTitle("SUPERNOVA SAGA");
         primaryStage.setScene(scene);
         primaryStage.show();
     }
