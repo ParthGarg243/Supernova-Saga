@@ -33,6 +33,10 @@ public class GameController {
     private Line stick;
     @FXML
     private AnchorPane gamePane;
+    @FXML
+    private AnchorPane movableobjects;
+    @FXML
+    private AnchorPane pause;
 
     private long startTime;
     private static final double INCREASE_AMOUNT = 1.0;
@@ -140,7 +144,7 @@ public class GameController {
         // Set the new position
         translateTransition.setToX(destinationX);
         translateTransition.setToY(destinationY);
-
+        translateTransition.setOnFinished(event -> moveAllObjects());
         // Play the translation animation
         translateTransition.play();
     }
@@ -149,6 +153,36 @@ public class GameController {
         gamePane.setOnMousePressed(this::handleMousePressed);
         gamePane.setOnMouseReleased(this::handleMouseReleased);
     }
+
+    public void moveAllObjects() {
+
+
+        // Create a TranslateTransition
+        TranslateTransition moveallobjects = new TranslateTransition(Duration.seconds(2), movableobjects);
+
+        // NEED TO CHANGE X AXIS BY CALCULATING THE LENGTH OF STICK
+        moveallobjects.setByX(-100);
+        moveallobjects.setByY(0);
+
+    // Play the transition
+        moveallobjects.play();
+    }
+
+
+    //FUNCTION TO MOVE GLASSMORPHISM SCREEN WHEN PAUSED
+//    public void movepause() {
+//
+//
+//        TranslateTransition pausescreen = new TranslateTransition(Duration.seconds(2), pause);
+//
+//        // Set translation parameters
+//        pausescreen.setByX(0);
+//        pausescreen.setByY(-100);
+//
+//
+//        pausescreen.play();
+//    }
+
 
     public void setMainWindow(Stage stage) {
         this.stage = stage;
