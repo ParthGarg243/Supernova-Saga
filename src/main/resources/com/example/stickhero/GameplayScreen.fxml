@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.Group?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
 
-<AnchorPane fx:id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMouseClicked="#increaseLength" prefHeight="650.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickhero.GameController">
+<AnchorPane fx:id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#handleMousePressed" onMouseReleased="#handleMouseReleased" prefHeight="650.0" prefWidth="406.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickhero.GameController">
    <children>
       <ImageView fitHeight="660.0" fitWidth="410.0" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -20,6 +21,6 @@
       </ImageView>
       <Rectangle fx:id="nextPlatform" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="243.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="57.0" />
       <Rectangle fx:id="currentPlatform" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="102.0" />
-      <Line fx:id="stick" endX="-100.0" endY="-10.0" layoutX="163.0" layoutY="431.0" startX="-100.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Line fx:id="stick" endX="-100.0" endY="-10.0" layoutX="161.0" layoutY="453.0" startX="-100.0" strokeLineCap="ROUND" strokeWidth="3.0" />
    </children>
 </AnchorPane>
