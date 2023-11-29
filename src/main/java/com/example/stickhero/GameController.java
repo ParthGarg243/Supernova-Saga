@@ -169,20 +169,20 @@ public void initializeGame() {
     gamePane.setOnMousePressed(this::handleMousePressed);
     gamePane.setOnMouseReleased(this::handleMouseReleased);
 
-    try {
-        Media sound = new Media(getClass().getResource("/music/background.mp3").toURI().toString());
-        mediaPlayer = new MediaPlayer(sound);
-        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-        mediaPlayer.play();
-
-        // Handle exception for music URI
-        Media music = new Media("src/main/resources/com/example/stickhero/musics/space_line-27593.mp3");
-        mediaPlayer = new MediaPlayer(music);
-    } catch (URISyntaxException e) {
-        // Handle the exception appropriately
-        e.printStackTrace();
-        // Provide a fallback or notify the user
-    }
+//    try {
+//        Media sound = new Media(getClass().getResource("/music/background.mp3").toURI().toString());
+//        mediaPlayer = new MediaPlayer(sound);
+//        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+//        mediaPlayer.play();
+//
+//        // Handle exception for music URI
+//        Media music = new Media("src/main/resources/com/example/stickhero/musics/space_line-27593.mp3");
+//        mediaPlayer = new MediaPlayer(music);
+//    } catch (URISyntaxException e) {
+//        // Handle the exception appropriately
+//        e.printStackTrace();
+//        // Provide a fallback or notify the user
+//    }
 }
 
     //gamePane.setOnMouseReleased(this::playsong);
