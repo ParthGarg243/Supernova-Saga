@@ -17,12 +17,15 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.net.URISyntaxException;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 
 public class GameController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-
+    private MediaPlayer mediaPlayer;
     @FXML
     private ImageView heroImage;
     @FXML
@@ -149,10 +152,42 @@ public class GameController {
         translateTransition.play();
     }
 
-    public void initializeGame() {
-        gamePane.setOnMousePressed(this::handleMousePressed);
-        gamePane.setOnMouseReleased(this::handleMouseReleased);
+//    public void initializeGame() throws URISyntaxException{
+//        gamePane.setOnMousePressed(this::handleMousePressed);
+//        gamePane.setOnMouseReleased(this::handleMouseReleased);
+//
+//        Media sound = new Media("src/main/resources/com/example/stickhero/musics/space_line-27593.mp3");
+//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+//
+//        //      Media media = new Media(getClass().getResource("/music/background.mp3").toURI().toString());
+////            mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+//        mediaPlayer.play();
+//        //gamePane.setOnMouseReleased(this::playsong);
+//    }
+public void initializeGame() {
+    gamePane.setOnMousePressed(this::handleMousePressed);
+    gamePane.setOnMouseReleased(this::handleMouseReleased);
+
+    try {
+        Media sound = new Media(getClass().getResource("/music/background.mp3").toURI().toString());
+        mediaPlayer = new MediaPlayer(sound);
+        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+        mediaPlayer.play();
+
+        // Handle exception for music URI
+        Media music = new Media("src/main/resources/com/example/stickhero/musics/space_line-27593.mp3");
+        mediaPlayer = new MediaPlayer(music);
+    } catch (URISyntaxException e) {
+        // Handle the exception appropriately
+        e.printStackTrace();
+        // Provide a fallback or notify the user
     }
+}
+
+    //gamePane.setOnMouseReleased(this::playsong);
+
+
 
     public void moveAllObjects() {
 
@@ -182,6 +217,17 @@ public class GameController {
 //
 //        pausescreen.play();
 //    }
+//    public void playsong() throws URISyntaxException {
+//        Media sound = new Media("src/main/resources/com/example/stickhero/musics/space_line-27593.mp3");
+//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
+//
+//        //      Media media = new Media(getClass().getResource("/music/background.mp3").toURI().toString());
+////            mediaPlayer = new MediaPlayer(media);
+//        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
+//        mediaPlayer.play();
+//    }
+
+
 
 
     public void setMainWindow(Stage stage) {
