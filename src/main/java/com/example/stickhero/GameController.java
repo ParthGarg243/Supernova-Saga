@@ -148,6 +148,13 @@ public class GameController {
         translateTransition.setToX(destinationX);
         translateTransition.setToY(destinationY);
         translateTransition.setOnFinished(event -> moveAllObjects());
+        translateTransition.setOnFinished(event -> {
+
+            moveAllObjects();
+            stick.setEndY(stick.getStartY());
+        });
+        // now the stick length is 0 after every movement
+
         // Play the translation animation
         translateTransition.play();
     }
