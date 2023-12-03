@@ -183,10 +183,6 @@ public void initializeGame() {
 //    }
 }
 
-    //gamePane.setOnMouseReleased(this::playsong);
-
-
-
 
     public void moveAllObjects() {
         Random random = new Random();
@@ -196,43 +192,19 @@ public void initializeGame() {
         rectangle.setLayoutX(410);
         rectangle.setLayoutY(455);
         movableobjects.getChildren().add(rectangle); // Add the rectangle to the AnchorPane's children list
-
+        movableobjects.getChildren().add(heroImage); // Add the image to the AnchorPane
+        movableobjects.getChildren().add(stick);
+        movableobjects.getChildren().add(currentPlatform);
+        movableobjects.getChildren().add(nextPlatform);
         TranslateTransition moveallobjects = new TranslateTransition(Duration.seconds(2), movableobjects);
         double stickLength = stick.getEndY() - stick.getStartY();
 
         // NEED TO CHANGE X AXIS BY CALCULATING THE LENGTH OF STICK
-        moveallobjects.setByX(-100);
+        double  newpos=movableobjects.getLayoutX();
+        moveallobjects.setByX(newpos+stickLength);
         moveallobjects.setByY(0);
-
-    // Play the transition
         moveallobjects.play();
     }
-
-
-    //FUNCTION TO MOVE GLASSMORPHISM SCREEN WHEN PAUSED
-//    public void movepause() {
-//
-//
-//        TranslateTransition pausescreen = new TranslateTransition(Duration.seconds(2), pause);
-//
-//        // Set translation parameters
-//        pausescreen.setByX(0);
-//        pausescreen.setByY(-100);
-//
-//
-//        pausescreen.play();
-//    }
-//    public void playsong() throws URISyntaxException {
-//        Media sound = new Media("src/main/resources/com/example/stickhero/musics/space_line-27593.mp3");
-//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//
-//        //      Media media = new Media(getClass().getResource("/music/background.mp3").toURI().toString());
-////            mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-//        mediaPlayer.play();
-//    }
-
-
 
 
     public void setMainWindow(Stage stage) {
