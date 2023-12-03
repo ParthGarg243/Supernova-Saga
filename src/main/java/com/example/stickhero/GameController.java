@@ -11,6 +11,7 @@ import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -18,6 +19,8 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
+import java.util.Random;
+
 import javafx.scene.media.Media;
 import javafx.scene.media.MediaPlayer;
 
@@ -159,19 +162,7 @@ public class GameController {
         translateTransition.play();
     }
 
-//    public void initializeGame() throws URISyntaxException{
-//        gamePane.setOnMousePressed(this::handleMousePressed);
-//        gamePane.setOnMouseReleased(this::handleMouseReleased);
-//
-//        Media sound = new Media("src/main/resources/com/example/stickhero/musics/space_line-27593.mp3");
-//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//
-//        //      Media media = new Media(getClass().getResource("/music/background.mp3").toURI().toString());
-////            mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-//        mediaPlayer.play();
-//        //gamePane.setOnMouseReleased(this::playsong);
-//    }
+
 public void initializeGame() {
     gamePane.setOnMousePressed(this::handleMousePressed);
     gamePane.setOnMouseReleased(this::handleMouseReleased);
@@ -196,11 +187,18 @@ public void initializeGame() {
 
 
 
+
     public void moveAllObjects() {
+        Random random = new Random();
+        int width = random.nextInt(100) + 1;
+        Rectangle rectangle = new Rectangle(width, 200); // Set the rectangle's width and height
+        rectangle.setFill(Color.BLACK); // Set the rectangle's fill color
+        rectangle.setLayoutX(410);
+        rectangle.setLayoutY(455);
+        movableobjects.getChildren().add(rectangle); // Add the rectangle to the AnchorPane's children list
 
-
-        // Create a TranslateTransition
         TranslateTransition moveallobjects = new TranslateTransition(Duration.seconds(2), movableobjects);
+        double stickLength = stick.getEndY() - stick.getStartY();
 
         // NEED TO CHANGE X AXIS BY CALCULATING THE LENGTH OF STICK
         moveallobjects.setByX(-100);
