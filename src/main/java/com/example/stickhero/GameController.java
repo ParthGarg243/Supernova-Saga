@@ -91,12 +91,14 @@ public class GameController {
     }
 
     private void increaseLengthLoop() {
+        stickLength = 0;
         while (true) {
             if (isMousePressed == 1) {
                 long currentTime = System.currentTimeMillis();
                 long elapsedTime = currentTime - startTime;
 
                 double newStickLength = stick.getEndY() - (INCREASE_AMOUNT * (elapsedTime / 200.0));
+                stickLength -= INCREASE_AMOUNT * (elapsedTime / 200.0);
 
                 stick.setEndY(newStickLength);
             }
@@ -104,7 +106,8 @@ public class GameController {
             try {
                 // Sleep for the specified interval
                 Thread.sleep(INCREASE_INTERVAL);
-            } catch (InterruptedException e) {
+            }
+            catch (InterruptedException e) {
                 // Handle interruption if needed
                 e.printStackTrace();
             }
@@ -141,11 +144,13 @@ public class GameController {
         System.out.println(stickLength);
         double destinationX;
 
-        if (((-1)*stickLength >= lowerBound) && ((-1)*stickLength <= upperBound)) {
-            destinationX = secondPlatform.getLayoutX() - secondPlatform.getWidth() / 2;
+        if (((-1)*stick.getEndY() >= lowerBound) && ((-1)*stick.getEndY() <= upperBound)) {
+            destinationX = secondPlatform.getLayoutX() - secondPlatform.getWidth() - heroImage.getFitWidth();
+            System.out.println(destinationX);
         }
         else {
-            destinationX = stick.getLayoutX() + (-1)*stickLength;
+            destinationX = heroImage.getLayoutX() + stickLength;
+            System.out.println(destinationX);
         }
 
         double destinationY = heroImage.getTranslateY();
