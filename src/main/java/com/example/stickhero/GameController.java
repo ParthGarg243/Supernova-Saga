@@ -17,30 +17,28 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.net.URISyntaxException;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
 
 public class GameController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private MediaPlayer mediaPlayer;
     @FXML
     private ImageView heroImage;
     @FXML
-    private Rectangle currentPlatform;
+    private Rectangle firstPlatform;
     @FXML
-    private Rectangle nextPlatform;
+    private Rectangle secondPlatform;
+    @FXML
+    private Rectangle thirdPlatform;
     @FXML
     private Line stick;
     @FXML
     private AnchorPane gamePane;
-    @FXML
-    private AnchorPane movableobjects;
-    @FXML
-    private AnchorPane pause;
-
+    private Platform platform1 = new Platform(200, 45, 140, 455, firstPlatform);
+    private Platform platform2 = new Platform(200, 77, 367, 455, secondPlatform);
+    private Platform platform3 = new Platform(200, 98, 611, 455, thirdPlatform);
+    private Hero myHero = new Hero(60, 45, 140, 400, heroImage);
+    double stickLength;
     private long startTime;
     private static final double INCREASE_AMOUNT = 1.0;
     private static final long INCREASE_INTERVAL = 25; // milliseconds
@@ -117,7 +115,7 @@ public class GameController {
         // Set the pivot point to the bottom end of the line
         stick.setRotate(0); // Reset rotation
         stick.setStartY(((-1) * stick.getEndY()));
-        stick.setTranslateY(currentPlatform.getTranslateY() + 1);
+        stick.setTranslateY(firstPlatform.getTranslateY() + 1);
 
         // Create a RotateTransition for the line
         RotateTransition rotateTransition = new RotateTransition(Duration.seconds(1), stick);
@@ -136,108 +134,35 @@ public class GameController {
         // Create a TranslateTransition for heroImage
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), heroImage);
 
-        // Set the destination X coordinate (adjust as needed)
-        double destinationX = nextPlatform.getLayoutX() - nextPlatform.getWidth() / 2;
-//        double destinationX = heroImage.getLayoutX() - stick.getEndY() - heroImage.getFitWidth()/2;
+        double lowerBound = secondPlatform.getLayoutX() - (firstPlatform.getLayoutX() + firstPlatform.getWidth());
+        System.out.println(lowerBound);
+        double upperBound = lowerBound + secondPlatform.getWidth();
+        System.out.println(upperBound);
+        System.out.println(stickLength);
+        double destinationX;
 
+        if (((-1)*stickLength >= lowerBound) && ((-1)*stickLength <= upperBound)) {
+            destinationX = secondPlatform.getLayoutX() - secondPlatform.getWidth() / 2;
+        }
+        else {
+            destinationX = stick.getLayoutX() + (-1)*stickLength;
+        }
 
-        // Set the destination Y coordinate (same as the current position)
         double destinationY = heroImage.getTranslateY();
 
         // Set the new position
         translateTransition.setToX(destinationX);
         translateTransition.setToY(destinationY);
-        translateTransition.setOnFinished(event -> moveAllObjects());
-        translateTransition.setOnFinished(event -> {
-
-            moveAllObjects();
-            stick.setEndY(stick.getStartY());
-        });
-        // now the stick length is 0 after every movement
 
         // Play the translation animation
         translateTransition.play();
     }
-
-//    public void initializeGame() throws URISyntaxException{
-//        gamePane.setOnMousePressed(this::handleMousePressed);
-//        gamePane.setOnMouseReleased(this::handleMouseReleased);
-//
-//        Media sound = new Media("src/main/resources/com/example/stickhero/musics/space_line-27593.mp3");
-//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//
-//        //      Media media = new Media(getClass().getResource("/music/background.mp3").toURI().toString());
-////            mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-//        mediaPlayer.play();
-//        //gamePane.setOnMouseReleased(this::playsong);
-//    }
 public void initializeGame() {
     gamePane.setOnMousePressed(this::handleMousePressed);
     gamePane.setOnMouseReleased(this::handleMouseReleased);
-
-//    try {
-//        Media sound = new Media(getClass().getResource("/music/background.mp3").toURI().toString());
-//        mediaPlayer = new MediaPlayer(sound);
-//        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-//        mediaPlayer.play();
-//
-//        // Handle exception for music URI
-//        Media music = new Media("src/main/resources/com/example/stickhero/musics/space_line-27593.mp3");
-//        mediaPlayer = new MediaPlayer(music);
-//    } catch (URISyntaxException e) {
-//        // Handle the exception appropriately
-//        e.printStackTrace();
-//        // Provide a fallback or notify the user
-//    }
 }
 
-    //gamePane.setOnMouseReleased(this::playsong);
-
-
-
-    public void moveAllObjects() {
-
-
-        // Create a TranslateTransition
-        TranslateTransition moveallobjects = new TranslateTransition(Duration.seconds(2), movableobjects);
-
-        // NEED TO CHANGE X AXIS BY CALCULATING THE LENGTH OF STICK
-        moveallobjects.setByX(-100);
-        moveallobjects.setByY(0);
-
-    // Play the transition
-        moveallobjects.play();
-    }
-
-
-    //FUNCTION TO MOVE GLASSMORPHISM SCREEN WHEN PAUSED
-//    public void movepause() {
-//
-//
-//        TranslateTransition pausescreen = new TranslateTransition(Duration.seconds(2), pause);
-//
-//        // Set translation parameters
-//        pausescreen.setByX(0);
-//        pausescreen.setByY(-100);
-//
-//
-//        pausescreen.play();
-//    }
-//    public void playsong() throws URISyntaxException {
-//        Media sound = new Media("src/main/resources/com/example/stickhero/musics/space_line-27593.mp3");
-//        MediaPlayer mediaPlayer = new MediaPlayer(sound);
-//
-//        //      Media media = new Media(getClass().getResource("/music/background.mp3").toURI().toString());
-////            mediaPlayer = new MediaPlayer(media);
-//        mediaPlayer.setCycleCount(MediaPlayer.INDEFINITE);
-//        mediaPlayer.play();
-//    }
-
-
-
-
-    public void setMainWindow(Stage stage) {
+public void setMainWindow(Stage stage) {
         this.stage = stage;
     }
 }
