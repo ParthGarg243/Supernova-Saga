@@ -5,15 +5,12 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Point2D;
-import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
@@ -39,9 +36,6 @@ public class GameController {
     private Line stick;
     @FXML
     private AnchorPane gamePane;
-//    @FXML
-//    private Rectangle pf1=new Rectangle(140,455,45,500);
-
 
     private Platform platform1 = new Platform(200, 45, 140, 455, firstPlatform);
     private Platform platform2 = new Platform(200, 77, 367, 455, secondPlatform);
@@ -83,7 +77,6 @@ public class GameController {
         new Thread(controller::increaseLengthLoop).start();
     }
 
-
     public void handleMousePressed(MouseEvent mouseEvent) {
         // Record the start time when the mouse is pressed
         startTime = System.currentTimeMillis();
@@ -100,7 +93,7 @@ public class GameController {
     }
 
     private void increaseLengthLoop() {
-        stickLength = 0;
+        stickLength = 10;
         while (true) {
             if (isMousePressed == 1) {
                 long currentTime = System.currentTimeMillis();
@@ -154,11 +147,11 @@ public class GameController {
         double destinationX;
 
         if (((-1)*stick.getEndY() >= lowerBound) && ((-1)*stick.getEndY() <= upperBound)) {
-            destinationX = secondPlatform.getLayoutX() - secondPlatform.getWidth() - heroImage.getFitWidth();
+            destinationX = secondPlatform.getLayoutX();
             System.out.println(destinationX);
         }
         else {
-            destinationX = heroImage.getLayoutX() + stickLength;
+            destinationX = heroImage.getLayoutX() + firstPlatform.getWidth() - stickLength;
             System.out.println(destinationX);
         }
 
@@ -167,11 +160,11 @@ public class GameController {
         // Set the new position
         translateTransition.setToX(destinationX);
         translateTransition.setToY(destinationY);
-        translateTransition.setOnFinished(event -> moveall());
+        translateTransition.setOnFinished(event -> moveAll());
         // Play the translation animation
         translateTransition.play();
     }
-    public void moveall(){
+    public void moveAll(){
 
         Rectangle pf1 = new Rectangle(777, 200);
         pf1.setFill(RED); // Set the rectangle's fill color
