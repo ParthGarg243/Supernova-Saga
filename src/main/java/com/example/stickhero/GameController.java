@@ -94,7 +94,7 @@ public class GameController {
     public void handleMouseReleased(MouseEvent mouseEvent) {
         // Set isMousePressed to 0
         isMousePressed = 0;
-
+        stickLength = 0;
         rotateStickAndMoveHero();
     }
 
@@ -147,7 +147,7 @@ public class GameController {
         int flag=0;
         double lowerBound = secondPlatform.getLayoutX() - (firstPlatform.getLayoutX() + firstPlatform.getWidth());
         double upperBound = lowerBound + secondPlatform.getWidth();
-        System.out.println("hero before"+heroImage.getLayoutX());
+        System.out.println("hero before "+heroImage.getLayoutX());
         double destinationX;
 
         if (((-1)*stick.getEndY() >= lowerBound) && ((-1)*stick.getEndY() <= upperBound)) {
@@ -187,13 +187,13 @@ public class GameController {
         TranslateTransition p2 = new TranslateTransition(Duration.seconds(2), secondPlatform);
         TranslateTransition p3 = new TranslateTransition(Duration.seconds(2), thirdPlatform);
 //        stick.setEndY(stick.getStartY());
-        System.out.println("befor"+secondPlatform.getLayoutX());
+        System.out.println("before "+secondPlatform.getLayoutX());
         h.setToX(0);
         s.setToX(-(secondPlatform.getLayoutX()));
         p1.setToX(-(secondPlatform.getLayoutX()));
         p2.setToX(-(secondPlatform.getLayoutX()));
         p3.setToX(-(secondPlatform.getLayoutX()));
-        //h.setOnFinished(event -> changeplatforms());
+        p1.setOnFinished(event -> changePlatforms());
         //translateTransition.setToY(destinationY);
         s.play();
         p1.play();
@@ -221,7 +221,7 @@ public class GameController {
         h.play();
 
     }
-    public void fliphero(){
+    public void flipHero(){
 
         heroImage.setScaleY(-1);
         heroImage.setLayoutY(heroImage.getLayoutY() + heroImage.getFitHeight() );
@@ -250,7 +250,7 @@ public class GameController {
 //        new Thread(controller::increaseLengthLoop).start();
 //    }
 
-    public void changeplatforms(){
+    public void changePlatforms(){
         Rectangle temp=firstPlatform;
         firstPlatform=secondPlatform;
         secondPlatform=thirdPlatform;
@@ -262,6 +262,7 @@ public class GameController {
         h.setToX(421);
         h.play();
     }
+
     public void initializeGame() {
 //        for (int i=0;i<=10;i++){
 //            Random random = new Random();
