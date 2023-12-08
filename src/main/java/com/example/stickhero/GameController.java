@@ -138,7 +138,7 @@ public class GameController {
     private void moveHeroImage() {
         // Create a TranslateTransition for heroImage
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), heroImage);
-
+        int flag=0;
         double lowerBound = secondPlatform.getLayoutX() - (firstPlatform.getLayoutX() + firstPlatform.getWidth());
         System.out.println(lowerBound);
         double upperBound = lowerBound + secondPlatform.getWidth();
@@ -151,8 +151,10 @@ public class GameController {
             System.out.println(destinationX);
         }
         else {
+            flag=1;
             destinationX = heroImage.getLayoutX() + firstPlatform.getWidth() - stickLength;
             System.out.println(destinationX);
+
         }
 
         double destinationY = heroImage.getTranslateY();
@@ -161,6 +163,10 @@ public class GameController {
         translateTransition.setToX(destinationX);
         translateTransition.setToY(destinationY);
         translateTransition.setOnFinished(event -> moveAll());
+        if(flag==1){
+            translateTransition.setOnFinished(event->moveDown());
+        }
+
         // Play the translation animation
         translateTransition.play();
     }
@@ -180,8 +186,6 @@ public class GameController {
         p1.setToX(-(secondPlatform.getLayoutX()));
         p2.setToX(-(secondPlatform.getLayoutX()));
         p3.setToX(-(secondPlatform.getLayoutX()));
-
-
 
         //translateTransition.setToY(destinationY);
         p1.play();
@@ -216,7 +220,13 @@ public class GameController {
         //moveAllObjectsTransition.play();
 
     }
+    public void moveDown(){
+        TranslateTransition h = new TranslateTransition(Duration.seconds(3),heroImage);
+        h.setToY(655);
+        h.play();
 
+
+    }
 public void initializeGame() {
     gamePane.setOnMousePressed(this::handleMousePressed);
     gamePane.setOnMouseReleased(this::handleMouseReleased);
