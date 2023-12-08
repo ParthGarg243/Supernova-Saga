@@ -18,6 +18,7 @@ import javafx.util.Duration;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.EventObject;
 import java.util.Random;
 
 import static javafx.scene.paint.Color.*;
@@ -145,15 +146,13 @@ public class GameController {
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), heroImage);
         int flag=0;
         double lowerBound = secondPlatform.getLayoutX() - (firstPlatform.getLayoutX() + firstPlatform.getWidth());
-        System.out.println(lowerBound);
         double upperBound = lowerBound + secondPlatform.getWidth();
-        System.out.println(upperBound);
-        System.out.println(stickLength);
+        System.out.println("hero before"+heroImage.getLayoutX());
         double destinationX;
 
         if (((-1)*stick.getEndY() >= lowerBound) && ((-1)*stick.getEndY() <= upperBound)) {
             destinationX = secondPlatform.getLayoutX();
-            System.out.println(destinationX);
+
         }
         else {
             flag=1;
@@ -168,6 +167,7 @@ public class GameController {
         translateTransition.setToX(destinationX);
         translateTransition.setToY(destinationY);
         translateTransition.setOnFinished(event -> moveAll());
+
         if(flag==1){
             translateTransition.setOnFinished(event->moveDown());
         }
@@ -177,60 +177,79 @@ public class GameController {
     }
     public void moveAll(){
 
-        Rectangle pf1 = new Rectangle(777, 200);
-        pf1.setFill(RED); // Set the rectangle's fill color
-        pf1.setLayoutX(368);
-        pf1.setLayoutY(455);
+//        Rectangle pf1 = new Rectangle(777, 200);
+//        pf1.setFill(RED); // Set the rectangle's fill color
+//        pf1.setLayoutX(368);
+//        pf1.setLayoutY(455);
         TranslateTransition h = new TranslateTransition(Duration.seconds(2),heroImage);
+        TranslateTransition s = new TranslateTransition(Duration.seconds(2), stick);
         TranslateTransition p1 = new TranslateTransition(Duration.seconds(2), firstPlatform);
         TranslateTransition p2 = new TranslateTransition(Duration.seconds(2), secondPlatform);
         TranslateTransition p3 = new TranslateTransition(Duration.seconds(2), thirdPlatform);
-        stick.setEndY(stick.getStartY());
-
+//        stick.setEndY(stick.getStartY());
+        System.out.println("befor"+secondPlatform.getLayoutX());
         h.setToX(0);
+        s.setToX(-(secondPlatform.getLayoutX()));
         p1.setToX(-(secondPlatform.getLayoutX()));
         p2.setToX(-(secondPlatform.getLayoutX()));
         p3.setToX(-(secondPlatform.getLayoutX()));
-        h.setOnFinished(event -> changeplatforms());
+        //h.setOnFinished(event -> changeplatforms());
         //translateTransition.setToY(destinationY);
+        s.play();
         p1.play();
         p2.play();
         p3.play();
         h.play();
-
-//        Group objectGroup = new Group();
-//        objectGroup.getChildren().addAll(heroImage, stick);
-//
-//        Point2D translationDelta = new Point2D(100, 50);
-//        for (Node object : objectGroup.getChildren()) {
-//            TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), object);
-//            translateTransition.setByX(translationDelta.getX());
-//            translateTransition.setByY(translationDelta.getY());
-//            translateTransition.play();
-//        }
-
-        // AnchorPane movableobjects = new AnchorPane();
-        //movableobjects.getChildren().add(heroImage);
-        // movableobjects.getChildren().add(stick);
-        //allobjects.getChildren().add(platform1.getThisPlatform());
-        // allobjects.getChildren().add(platform2.getThisPlatform());
-        //allobjects.getChildren().add(platform3.getThisPlatform());
-        // TranslateTransition moveAllObjectsTransition = new TranslateTransition(Duration.seconds(10),movableobjects );
-
-        // Set the translation parameters
-        //moveAllObjectsTransition.setByX(10);
-        //moveAllObjectsTransition.setByY(0);
-
-        // Play the translation animation
-        //moveAllObjectsTransition.play();
-
+        s.setOnFinished(event->updateStick());
+        System.out.println("after"+secondPlatform.getLayoutX());
     }
+
+    public void updateStick() {
+        stick.setEndX(0);
+        stick.setStartY(0);
+        stick.setStartX(0);
+        stick.setEndY(-10);
+        stick.setRotate(0);
+        stick.setLayoutX(secondPlatform.getLayoutX() + secondPlatform.getWidth());
+        stick.setLayoutY(455);
+    }
+
     public void moveDown(){
         TranslateTransition h = new TranslateTransition(Duration.seconds(3),heroImage);
         h.setToY(655);
+        //h.setOnFinished(event -> switchToGameOverScreen());
         h.play();
 
     }
+    public void fliphero(){
+
+        heroImage.setScaleY(-1);
+        heroImage.setLayoutY(heroImage.getLayoutY() + heroImage.getFitHeight() );
+
+    }
+//    private void switchToGameOverScreen() throws IOException {
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameplayScreen.fxml"));
+//        Parent root = loader.load();
+//        GameController controller = loader.getController();
+//
+//        // Set the controller for FXMLLoader explicitly
+//        loader.setController(controller);
+//
+//        // Rest of your code remains the same
+//        stage = (Stage).getScene().getWindow();
+//        scene = new Scene(root);
+//        stage.setMaxWidth(410);
+//        stage.setScene(scene);
+//        stage.show();
+//
+//        // Set up mouse pressed and released event handlers
+//        controller.setMainWindow(stage); // Ensure the controller has a reference to the stage
+//        controller.initializeGame(); // Call a method to initialize game-related components
+//
+//        // Start the loop in a separate thread
+//        new Thread(controller::increaseLengthLoop).start();
+//    }
+
     public void changeplatforms(){
         Rectangle temp=firstPlatform;
         firstPlatform=secondPlatform;
@@ -253,9 +272,7 @@ public class GameController {
         gamePane.setOnMousePressed(this::handleMousePressed);
         gamePane.setOnMouseReleased(this::handleMouseReleased);
     }
-    public void fliphero(){
 
-    }
     public void setMainWindow(Stage stage) {
         this.stage = stage;
     }

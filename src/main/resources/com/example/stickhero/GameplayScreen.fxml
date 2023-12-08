@@ -24,16 +24,16 @@
             <Image url="@images/pause.png" />
          </image>
       </ImageView>
-      <Rectangle fx:id="firstPlatform" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="-3.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="45.0" />
-      <Rectangle fx:id="secondPlatform" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="186.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="77.0" />
-      <Rectangle fx:id="thirdPlatform" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="421.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="98.0" />
-      <!--      PAUSE BUTTON NOT WORKING ON GETTING CLICKED-->
-      <Button layoutX="370.0" layoutY="31.0" mnemonicParsing="false" opacity="0.0" prefHeight="26.0" prefWidth="31.0" />
-      <ImageView fx:id="heroImage" fitHeight="60.0" fitWidth="45.0" layoutX="-6.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
+      <Rectangle fx:id="firstPlatform" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="45.0" />
+<!--      PAUSE BUTTON NOT WORKING ON GETTING CLICKED-->
+      <Button layoutX="370.0" layoutY="31.0" mnemonicParsing="false" onAction="#switchToGameScreen" opacity="0.0" prefHeight="26.0" prefWidth="31.0" />
+      <ImageView fx:id="heroImage" fitHeight="60.0" fitWidth="45.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Hero.png" />
          </image>
       </ImageView>
-      <Line fx:id="stick" endY="-10.0" layoutX="39.0" layoutY="455.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Rectangle fx:id="secondPlatform" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="186.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="77.0" />
+      <Rectangle fx:id="thirdPlatform" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="421.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="98.0" />
+      <Line fx:id="stick" endY="-10.0" layoutX="44.0" layoutY="455.0" strokeLineCap="ROUND" strokeWidth="3.0" />
    </children>
 </AnchorPane>
