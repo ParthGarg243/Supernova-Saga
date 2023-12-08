@@ -52,6 +52,7 @@ public class GameController {
     private static final long INCREASE_INTERVAL = 25; // milliseconds
     private int isMousePressed = 0;
 
+
     public void switchToStartScreen(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -143,6 +144,7 @@ public class GameController {
 
     private void moveHeroImage() {
         // Create a TranslateTransition for heroImage
+
         TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), heroImage);
         int flag=0;
         double lowerBound = secondPlatform.getLayoutX() - (firstPlatform.getLayoutX() + firstPlatform.getWidth());
@@ -151,12 +153,12 @@ public class GameController {
         double destinationX;
 
         if (((-1)*stick.getEndY() >= lowerBound) && ((-1)*stick.getEndY() <= upperBound)) {
-            destinationX = secondPlatform.getLayoutX();
+            destinationX = stick.getEndY();
 
         }
         else {
             flag=1;
-            destinationX = heroImage.getLayoutX() + firstPlatform.getWidth() - stickLength;
+            destinationX = stick.getEndY();
             System.out.println(destinationX);
 
         }
@@ -164,7 +166,7 @@ public class GameController {
         double destinationY = heroImage.getTranslateY();
 
         // Set the new position
-        translateTransition.setToX(destinationX);
+        translateTransition.setToX(-destinationX);
         translateTransition.setToY(destinationY);
         translateTransition.setOnFinished(event -> moveAll());
 
@@ -189,11 +191,11 @@ public class GameController {
 //        stick.setEndY(stick.getStartY());
         System.out.println("befor"+secondPlatform.getLayoutX());
         h.setToX(0);
-        s.setToX(-(secondPlatform.getLayoutX()));
-        p1.setToX(-(secondPlatform.getLayoutX()));
-        p2.setToX(-(secondPlatform.getLayoutX()));
-        p3.setToX(-(secondPlatform.getLayoutX()));
-        //h.setOnFinished(event -> changeplatforms());
+        s.setByX(-(secondPlatform.getLayoutX()));
+        p1.setByX(-(secondPlatform.getLayoutX()));
+        p2.setByX(-(secondPlatform.getLayoutX()));
+        p3.setByX(-(secondPlatform.getLayoutX()));
+        p1.setOnFinished(event -> changeplatforms());
         //translateTransition.setToY(destinationY);
         s.play();
         p1.play();
@@ -252,14 +254,15 @@ public class GameController {
 
     public void changeplatforms(){
         Rectangle temp=firstPlatform;
+
         firstPlatform=secondPlatform;
         secondPlatform=thirdPlatform;
         thirdPlatform=temp;
         Random random = new Random();
-        int newwidth = random.nextInt(100) + 1;
+        int newwidth = random.nextInt(50,100) + 1;
         thirdPlatform.setWidth(newwidth);
-        TranslateTransition h = new TranslateTransition(Duration.seconds(0.001),thirdPlatform);
-        h.setToX(421);
+        TranslateTransition h = new TranslateTransition(Duration.seconds(1),thirdPlatform);
+        h.setToX(421+firstPlatform.getLayoutX());
         h.play();
     }
     public void initializeGame() {
@@ -269,6 +272,10 @@ public class GameController {
 //            Platform p=new Platform(200,newwidth,421,455);
 //            platformArrayList.add(p);
 //        }
+        firstPlatform.setFill(RED);
+        secondPlatform.setFill(BLUE);
+
+
         gamePane.setOnMousePressed(this::handleMousePressed);
         gamePane.setOnMouseReleased(this::handleMouseReleased);
     }
