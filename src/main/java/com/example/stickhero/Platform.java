@@ -2,7 +2,7 @@ package com.example.stickhero;
 import javafx.fxml.FXML;
 import javafx.scene.shape.Rectangle;
 
-public class Platform extends Solid{
+public class Platform extends Rectangle{
     @FXML
     private Rectangle thisPlatform;
     int points;

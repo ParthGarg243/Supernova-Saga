@@ -5,18 +5,23 @@ import javafx.animation.TranslateTransition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Point2D;
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+
+import static javafx.scene.paint.Color.*;
 
 public class GameController {
     private Stage stage;
@@ -34,10 +39,14 @@ public class GameController {
     private Line stick;
     @FXML
     private AnchorPane gamePane;
+//    @FXML
+//    private Rectangle pf1=new Rectangle(140,455,45,500);
+
+
     private Platform platform1 = new Platform(200, 45, 140, 455, firstPlatform);
     private Platform platform2 = new Platform(200, 77, 367, 455, secondPlatform);
     private Platform platform3 = new Platform(200, 98, 611, 455, thirdPlatform);
-    private Hero myHero = new Hero(60, 45, 140, 400, heroImage);
+    private final Hero myHero = new Hero(60, 45, 140, 400, heroImage);
     double stickLength;
     private long startTime;
     private static final double INCREASE_AMOUNT = 1.0;
@@ -158,10 +167,63 @@ public class GameController {
         // Set the new position
         translateTransition.setToX(destinationX);
         translateTransition.setToY(destinationY);
-
+        translateTransition.setOnFinished(event -> moveall());
         // Play the translation animation
         translateTransition.play();
     }
+    public void moveall(){
+
+        Rectangle pf1 = new Rectangle(777, 200);
+        pf1.setFill(RED); // Set the rectangle's fill color
+        pf1.setLayoutX(368);
+        pf1.setLayoutY(455);
+        TranslateTransition h = new TranslateTransition(Duration.seconds(2),heroImage);
+        TranslateTransition p1 = new TranslateTransition(Duration.seconds(2), firstPlatform);
+        TranslateTransition p2 = new TranslateTransition(Duration.seconds(2), secondPlatform);
+        TranslateTransition p3 = new TranslateTransition(Duration.seconds(2), thirdPlatform);
+        stick.setEndY(stick.getStartY());
+
+        h.setToX(-(secondPlatform.getLayoutX()));
+        p1.setToX(-(secondPlatform.getLayoutX()));
+        p2.setToX(-(secondPlatform.getLayoutX()));
+        p3.setToX(-(secondPlatform.getLayoutX()));
+
+
+
+        //translateTransition.setToY(destinationY);
+        p1.play();
+        p2.play();
+        p3.play();
+        h.play();
+
+//        Group objectGroup = new Group();
+//        objectGroup.getChildren().addAll(heroImage, stick);
+//
+//        Point2D translationDelta = new Point2D(100, 50);
+//        for (Node object : objectGroup.getChildren()) {
+//            TranslateTransition translateTransition = new TranslateTransition(Duration.seconds(2), object);
+//            translateTransition.setByX(translationDelta.getX());
+//            translateTransition.setByY(translationDelta.getY());
+//            translateTransition.play();
+//        }
+
+        // AnchorPane movableobjects = new AnchorPane();
+        //movableobjects.getChildren().add(heroImage);
+       // movableobjects.getChildren().add(stick);
+        //allobjects.getChildren().add(platform1.getThisPlatform());
+       // allobjects.getChildren().add(platform2.getThisPlatform());
+        //allobjects.getChildren().add(platform3.getThisPlatform());
+       // TranslateTransition moveAllObjectsTransition = new TranslateTransition(Duration.seconds(10),movableobjects );
+
+        // Set the translation parameters
+        //moveAllObjectsTransition.setByX(10);
+        //moveAllObjectsTransition.setByY(0);
+
+        // Play the translation animation
+        //moveAllObjectsTransition.play();
+
+    }
+
 public void initializeGame() {
     gamePane.setOnMousePressed(this::handleMousePressed);
     gamePane.setOnMouseReleased(this::handleMouseReleased);
