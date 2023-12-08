@@ -189,8 +189,8 @@ public class GameController {
 
         h.setToX(0);
         p1.setToX(-(secondPlatform.getLayoutX()));
-        p2.setToX(0);
-        p3.setToX(secondPlatform.getLayoutX());
+        p2.setToX(-(secondPlatform.getLayoutX()));
+        p3.setToX(-(secondPlatform.getLayoutX()));
         h.setOnFinished(event -> changeplatforms());
         //translateTransition.setToY(destinationY);
         p1.play();
@@ -239,7 +239,7 @@ public class GameController {
         Random random = new Random();
         int newwidth = random.nextInt(100) + 1;
         thirdPlatform.setWidth(newwidth);
-        TranslateTransition h = new TranslateTransition(Duration.seconds(0.1),thirdPlatform);
+        TranslateTransition h = new TranslateTransition(Duration.seconds(0.001),thirdPlatform);
         h.setToX(421);
         h.play();
     }
