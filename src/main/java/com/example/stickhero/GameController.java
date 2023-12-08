@@ -17,6 +17,8 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 
 import static javafx.scene.paint.Color.*;
 
@@ -36,6 +38,8 @@ public class GameController {
     private Line stick;
     @FXML
     private AnchorPane gamePane;
+    private ArrayList<Platform> platformArrayList=new ArrayList<>();
+
 
     private Platform platform1 = new Platform(200, 45, 140, 455, firstPlatform);
     private Platform platform2 = new Platform(200, 77, 367, 455, secondPlatform);
@@ -67,6 +71,7 @@ public class GameController {
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setMaxWidth(410);
         stage.show();
 
         // Set up mouse pressed and released event handlers
@@ -186,7 +191,7 @@ public class GameController {
         p1.setToX(-(secondPlatform.getLayoutX()));
         p2.setToX(-(secondPlatform.getLayoutX()));
         p3.setToX(-(secondPlatform.getLayoutX()));
-
+        h.setOnFinished(event -> changeplatforms());
         //translateTransition.setToY(destinationY);
         p1.play();
         p2.play();
@@ -225,13 +230,32 @@ public class GameController {
         h.setToY(655);
         h.play();
 
-
+    }
+    public void changeplatforms(){
+        Rectangle temp=firstPlatform;
+        firstPlatform=secondPlatform;
+        secondPlatform=thirdPlatform;
+        thirdPlatform=temp;
+        Random random = new Random();
+        int newwidth = random.nextInt(100) + 1;
+        thirdPlatform.setWidth(newwidth);
+        TranslateTransition h = new TranslateTransition(Duration.seconds(0.1),thirdPlatform);
+        h.setToX(421);
+        h.play();
     }
 public void initializeGame() {
+//        for (int i=0;i<=10;i++){
+//            Random random = new Random();
+//            int newwidth = random.nextInt(100) + 1;
+//            Platform p=new Platform(200,newwidth,421,455);
+//            platformArrayList.add(p);
+//        }
     gamePane.setOnMousePressed(this::handleMousePressed);
     gamePane.setOnMouseReleased(this::handleMouseReleased);
 }
+public void fliphero(){
 
+}
 public void setMainWindow(Stage stage) {
         this.stage = stage;
     }
