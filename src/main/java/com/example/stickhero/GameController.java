@@ -70,8 +70,8 @@ public class GameController {
         // Rest of your code remains the same
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
-        stage.setScene(scene);
         stage.setMaxWidth(410);
+        stage.setScene(scene);
         stage.show();
 
         // Set up mouse pressed and released event handlers
@@ -187,10 +187,10 @@ public class GameController {
         TranslateTransition p3 = new TranslateTransition(Duration.seconds(2), thirdPlatform);
         stick.setEndY(stick.getStartY());
 
-        h.setToX(-(secondPlatform.getLayoutX()));
+        h.setToX(0);
         p1.setToX(-(secondPlatform.getLayoutX()));
-        p2.setToX(-(secondPlatform.getLayoutX()));
-        p3.setToX(-(secondPlatform.getLayoutX()));
+        p2.setToX(0);
+        p3.setToX(secondPlatform.getLayoutX());
         h.setOnFinished(event -> changeplatforms());
         //translateTransition.setToY(destinationY);
         p1.play();
@@ -211,11 +211,11 @@ public class GameController {
 
         // AnchorPane movableobjects = new AnchorPane();
         //movableobjects.getChildren().add(heroImage);
-       // movableobjects.getChildren().add(stick);
+        // movableobjects.getChildren().add(stick);
         //allobjects.getChildren().add(platform1.getThisPlatform());
-       // allobjects.getChildren().add(platform2.getThisPlatform());
+        // allobjects.getChildren().add(platform2.getThisPlatform());
         //allobjects.getChildren().add(platform3.getThisPlatform());
-       // TranslateTransition moveAllObjectsTransition = new TranslateTransition(Duration.seconds(10),movableobjects );
+        // TranslateTransition moveAllObjectsTransition = new TranslateTransition(Duration.seconds(10),movableobjects );
 
         // Set the translation parameters
         //moveAllObjectsTransition.setByX(10);
@@ -243,20 +243,20 @@ public class GameController {
         h.setToX(421);
         h.play();
     }
-public void initializeGame() {
+    public void initializeGame() {
 //        for (int i=0;i<=10;i++){
 //            Random random = new Random();
 //            int newwidth = random.nextInt(100) + 1;
 //            Platform p=new Platform(200,newwidth,421,455);
 //            platformArrayList.add(p);
 //        }
-    gamePane.setOnMousePressed(this::handleMousePressed);
-    gamePane.setOnMouseReleased(this::handleMouseReleased);
-}
-public void fliphero(){
+        gamePane.setOnMousePressed(this::handleMousePressed);
+        gamePane.setOnMouseReleased(this::handleMouseReleased);
+    }
+    public void fliphero(){
 
-}
-public void setMainWindow(Stage stage) {
+    }
+    public void setMainWindow(Stage stage) {
         this.stage = stage;
     }
 }
