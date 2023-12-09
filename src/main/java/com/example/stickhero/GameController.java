@@ -224,7 +224,7 @@ public class GameController {
 
                         heroImage.setLayoutX(finalNewX);
 
-                        if (isHeroFlipped && spawnedCherry == 1 && finalNewX > cherry.getLayoutX()) {
+                        if (isHeroFlipped && spawnedCherry == 1 && finalNewX + 10 > cherry.getLayoutX()) {
                             removeCherry();
                         }
                     });
