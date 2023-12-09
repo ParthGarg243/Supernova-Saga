@@ -7,14 +7,14 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickhero.GameController">
+<AnchorPane prefHeight="650.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickhero.GameController">
    <children>
-      <ImageView fitHeight="446.0" fitWidth="619.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="660.0" fitWidth="410.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/gameoverscreen.png" />
          </image>
       </ImageView>
-      <Button layoutX="119.0" layoutY="342.0" mnemonicParsing="false" onAction="#switchToGameScreen" opacity="0.0" prefHeight="54.0" prefWidth="58.0" text="Retry">
+      <Button layoutX="181.0" layoutY="502.0" mnemonicParsing="false" onAction="#switchToGameScreen" opacity="0.0" prefHeight="77.0" prefWidth="69.0" text="Retry">
          <opaqueInsets>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </opaqueInsets>
@@ -25,7 +25,7 @@
             <Font name="Bodoni MT Black" size="12.0" />
          </font>
       </Button>
-      <Button alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="20.0" layoutY="342.0" mnemonicParsing="false" onAction="#switchToStartScreen" opacity="0.0" prefHeight="56.0" prefWidth="58.0" text="Home">
+      <Button alignment="BASELINE_CENTER" contentDisplay="CENTER" layoutX="41.0" layoutY="501.0" mnemonicParsing="false" onAction="#switchToStartScreen" opacity="0.0" prefHeight="87.0" prefWidth="79.0" text="Home">
          <padding>
             <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
          </padding>

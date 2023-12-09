@@ -2,6 +2,7 @@ package com.example.stickhero;
 
 import javafx.animation.*;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -72,11 +73,13 @@ public class GameController {
         stage.show();
     }
 
-    public void switchToGameOverScreen(ActionEvent event) throws IOException {
+    private void switchToGameOverScreen() throws IOException {
+
         root = FXMLLoader.load(getClass().getResource("GameOverScreen.fxml"));
-        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        //stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
+        stage.setMaxWidth(410);
         stage.show();
     }
 
@@ -189,7 +192,11 @@ public class GameController {
             translateTransition.setOnFinished(event -> {
                 gamePane.getChildren().remove(stick);
                 fallDown();
-                endGame();
+                try {
+                    endGame();
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
             });
         }
         else {
@@ -201,17 +208,30 @@ public class GameController {
         canFlip = 0;
     }
 
-    public void endGame() {
+    public void endGame() throws IOException {
         TranslateTransition p1 = new TranslateTransition(Duration.seconds(3), firstPlatform);
         TranslateTransition p2 = new TranslateTransition(Duration.seconds(3), secondPlatform);
         TranslateTransition p3 = new TranslateTransition(Duration.seconds(3), thirdPlatform);
         p1.setToY(460);
         p2.setToY(460);
         p3.setToY(460);
+        p3.setOnFinished(event -> {
+            try {
+                finalgame();
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
         p1.play();
         p2.play();
         p3.play();
 
+
+
+
+    }
+    public void finalgame() throws IOException {
+        switchToGameOverScreen();
     }
 
     public void moveAll() {
@@ -273,35 +293,15 @@ public class GameController {
         translateTransition.setToY(655);
 
         ParallelTransition parallelTransition = new ParallelTransition(rotateTransition, translateTransition);
-        parallelTransition.setOnFinished(event -> {
-            try {
-                switchToGameOverScreen(null);
-            } catch (IOException e) {
-                throw new RuntimeException(e);
-            }
-        });
 
         parallelTransition.play();
-//        Duration delay=Duration.seconds(2);
-//
-//        Timeline timeline=new Timeline((new KeyFrame(delay,event -> {
-//            try {
-//                root=FXMLLoader.load(getClass().getResource("GameOverScreen.fxml"));
-//                stage=(Stage)((Node)event.getSource()).getScene().getWindow();
-//                scene=new Scene(root);
-//                stage.setScene(scene);
-//                stage.show();
-//            }catch (IOException i){
-//                System.out.println("IO excdeption");
-//            }
-  //      })));
+
 
     }
 
     public void flipHero(){
         heroImage.setScaleY(-1);
         heroImage.setLayoutY(heroImage.getLayoutY() + heroImage.getFitHeight() );
-
     }
 
     public void changePlatformsAndUpdateStick(){
