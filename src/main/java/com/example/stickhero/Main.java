@@ -1,7 +1,8 @@
 package com.example.stickhero;
 
-import java.io.IOException;
+import java.io.*;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -13,7 +14,30 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 public class Main extends Application {
+    public static void serialize() throws IOException {
+        GameEngine gameEngine=new GameEngine();
+        ArrayList s=gameEngine.savedGames;
+        ObjectOutputStream out = null;
+        try {
+            out = new ObjectOutputStream(
+                    new FileOutputStream("savedGames.txt"));
+            out.writeObject(s);
+        } finally {
+            out.close();
+        }
 
+    }
+    public static void deserialize() throws IOException {
+        ObjectInputStream in = null;
+        try {
+            in = new ObjectInputStream(new FileInputStream("savedGames.txt"));
+            ArrayList s1 = (ArrayList) in.readObject();
+        } catch (ClassNotFoundException e) {
+            throw new RuntimeException(e);
+        } finally {
+            in.close();
+        }
+    }
     @Override
     public void start(Stage primaryStage) throws Exception {
         music();

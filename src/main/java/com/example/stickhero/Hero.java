@@ -3,23 +3,21 @@ package com.example.stickhero;
 import javafx.fxml.FXML;
 import javafx.scene.image.ImageView;
 
-public class Hero extends Solid{
+public class Hero extends ImageView{
     private Score score;
     private int cherries;
+    private static Hero hero = null;
     @FXML
     private ImageView heroImage;
-
-    public Hero(float length, float width, float xCoord, float yCoord, ImageView heroImage) {
-        super(length, width, xCoord, yCoord);
-        this.heroImage = heroImage;
+    public static ImageView getInstance(ImageView hero)
+    {
+        if (hero == null) {
+            hero = new Hero(hero);
+        }
+        return hero;
     }
-
-    public ImageView getHeroImage() {
-        return heroImage;
-    }
-
-    public void setHeroImage(ImageView heroImage) {
-        this.heroImage = heroImage;
+    private Hero(ImageView hero) {
+        this.heroImage = hero;
     }
 
     public void move(){}

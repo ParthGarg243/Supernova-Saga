@@ -8,7 +8,6 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 
 import javafx.scene.Scene;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -116,6 +115,14 @@ public class GameController {
     }
     public void switchToInstructionScreen(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("instructionScreen.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.setMaxWidth(410);
+        stage.show();
+    }
+    public void switchToSelectCharScreen(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("SelectHero.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         scene = new Scene(root);
         stage.setScene(scene);
@@ -227,6 +234,7 @@ public class GameController {
 
     private void rotateStickAndMoveHero() {
         // Set the pivot point to the bottom end of the line
+
         stick.setRotate(0); // Reset rotation
         stick.setStartY(((-1) * stick.getEndY()));
         stick.setTranslateY(firstPlatform.getTranslateY() + 1);
@@ -319,7 +327,6 @@ public class GameController {
                         });
                     }
                     else {
-                        reviveText.setVisible(true);
                         Platform.runLater(() -> {
                             cherries -= 3;
                             cherryScore.setText(String.valueOf(cherries));
@@ -336,7 +343,10 @@ public class GameController {
                             moveAll();
                             removeNotCapturedCherry();
                         });
-                        reviveText.setVisible(false);
+                        reviveText.setVisible(true);
+                        TranslateTransition t = new TranslateTransition(Duration.seconds(1), reviveText);
+                        t.setByX(-350);
+                        t.play();
                     }
                 }
             });
@@ -364,7 +374,23 @@ public class GameController {
                 }
             });
 
-            translateTransition.play();
+            if (cherries < 3) {
+                translateTransition.play();
+            }
+            else {
+                Platform.runLater(() -> {
+                    cherries -= 3;
+                    cherryScore.setText(String.valueOf(cherries));
+                });
+                reviveText.setVisible(true);
+                TranslateTransition t = new TranslateTransition(Duration.seconds(1), reviveText);
+                t.setByX(-350);
+                t.play();
+                t.setOnFinished(event -> {
+                    moveAll();
+                    removeNotCapturedCherry();
+                });
+            }
         }
     }
 

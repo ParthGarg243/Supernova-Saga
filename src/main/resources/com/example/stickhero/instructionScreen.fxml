@@ -4,6 +4,8 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane prefHeight="657.0" prefWidth="387.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickhero.GameController">
    <children>
@@ -13,5 +15,10 @@
          </image>
       </ImageView>
       <Button fx:id="backinstruction" layoutX="14.0" layoutY="14.0" mnemonicParsing="false" onAction="#switchToStartScreen" opacity="0.0" prefHeight="50.0" prefWidth="65.0" text="Button" />
+      <Text fill="WHITE" layoutX="71.0" layoutY="637.0" strokeType="OUTSIDE" strokeWidth="0.0" text="*revive on collecting 3 stars" textAlignment="CENTER" wrappingWidth="270.5999755859375">
+         <font>
+            <Font name="Baskerville Old Face" size="24.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>
