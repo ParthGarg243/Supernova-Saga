@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class GameEngine {
 
     ArrayList<Score> savedGames=new ArrayList<>();
+
     private Hero stickHero;
 
     public GameEngine() {

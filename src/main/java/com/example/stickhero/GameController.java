@@ -318,26 +318,26 @@ public class GameController {
 
     }
 
-    public void flipHero(){
-        if (isSpaceBarPressed) {
-            //System.out.println(fliptry.getLayoutY());
-
-            double bottomY = heroImage.getLayoutY() + heroImage.getFitHeight();
-            heroImage.setLayoutY(bottomY );
-            heroImage.setScaleY(heroImage.getScaleY() * -1);
-            //System.out.println(fliptry.getLayoutY());
-            // Adjust the layoutY to keep the bottom part fixed
-
-
-            //System.out.println(fliptry.getLayoutY());
-            //System.out.println(fliptry.getLayoutY());
-            fliptry.setScaleY(fliptry.getScaleY() * -1);
-            //System.out.println(fliptry.getLayoutY());
-            // Adjust the layoutY to keep the bottom part fixed
-            fliptry.setLayoutY(-fliptry.getLayoutY()+fliptry.getFitHeight() );
-            //System.out.println(fliptry.getLayoutY());
-        }
-    }
+//    public void flipHero(){
+//        if (isSpaceBarPressed) {
+//            //System.out.println(fliptry.getLayoutY());
+//
+//            double bottomY = heroImage.getLayoutY() + heroImage.getFitHeight();
+//            heroImage.setLayoutY(bottomY );
+//            heroImage.setScaleY(heroImage.getScaleY() * -1);
+//            //System.out.println(fliptry.getLayoutY());
+//            // Adjust the layoutY to keep the bottom part fixed
+//
+//
+//            //System.out.println(fliptry.getLayoutY());
+//            //System.out.println(fliptry.getLayoutY());
+//            fliptry.setScaleY(fliptry.getScaleY() * -1);
+//            //System.out.println(fliptry.getLayoutY());
+//            // Adjust the layoutY to keep the bottom part fixed
+//            fliptry.setLayoutY(-fliptry.getLayoutY()+fliptry.getFitHeight() );
+//            //System.out.println(fliptry.getLayoutY());
+//        }
+//    }
 
     public void changePlatformsAndUpdateStick(){
         firstPlatform.setLayoutX(-100);
@@ -389,22 +389,22 @@ public class GameController {
         gamePane.setOnMouseReleased(this::handleMouseReleased);
 
 
-        gamePane.setOnKeyPressed(event -> {
-            if (event.getCode() == KeyCode.SPACE) {
-                isSpaceBarPressed = true;
-                flipHero();
-            }
-        });
+//        gamePane.setOnKeyPressed(event -> {
+//            if (event.getCode() == KeyCode.SPACE) {
+//                isSpaceBarPressed = true;
+//                flipHero();
+//            }
+//        });
 
         // Add key released event handler for the space bar
-        gamePane.setOnKeyReleased(event -> {
-            if (event.getCode() == KeyCode.SPACE) {
-                isSpaceBarPressed = false;
-            }
-        });
-
-        // Request focus to make sure key events are captured
-        gamePane.requestFocus();
+//        gamePane.setOnKeyReleased(event -> {
+//            if (event.getCode() == KeyCode.SPACE) {
+//                isSpaceBarPressed = false;
+//            }
+//        });
+//
+//        // Request focus to make sure key events are captured
+//        gamePane.requestFocus();
 
     }
 
