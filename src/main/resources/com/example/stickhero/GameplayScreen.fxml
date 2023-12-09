@@ -16,11 +16,6 @@
             <Image url="@images/GamePlayBG.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="76.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@images/star.png" />
-         </image>
-      </ImageView>
       <ImageView fitHeight="47.0" fitWidth="21.0" layoutX="365.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/pause.png" />
@@ -55,6 +50,26 @@
       <Text fx:id="cherryScore" fill="WHITE" layoutX="58.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="XX">
          <font>
             <Font size="33.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="firstChar" fitHeight="60.0" fitWidth="45.0" layoutX="511.0" layoutY="95.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/pink.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="secondChar" fitHeight="60.0" fitWidth="45.0" layoutX="511.0" layoutY="215.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/green.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="thirdChar" fitHeight="60.0" fitWidth="45.0" layoutX="549.0" layoutY="327.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/blue.png" />
+         </image>
+      </ImageView>
+      <Text fx:id="reviveText" fill="WHITE" layoutX="86.0" layoutY="199.0" strokeType="OUTSIDE" strokeWidth="0.0" text="You Revived!" textAlignment="CENTER" visible="false" wrappingWidth="238.59994506835938">
+         <font>
+            <Font name="Baskerville Old Face" size="64.0" />
          </font>
       </Text>
    </children>

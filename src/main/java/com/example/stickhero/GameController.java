@@ -8,6 +8,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
@@ -23,6 +24,7 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 import javafx.application.Platform;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Random;
 
@@ -47,10 +49,17 @@ public class GameController {
     private Score score = new Score();
     private int spawnedCherry = 0;
     private int finalscore;
+    private int selectChar = 0;
     private static int highScore;
     Random random = new Random();
     @FXML
     private ImageView heroImage;
+    @FXML
+    private static ImageView firstChar;
+    @FXML
+    private static ImageView secondChar;
+    @FXML
+    private static ImageView thirdChar;
     @FXML
     private ImageView fliptry;
     @FXML
@@ -90,6 +99,8 @@ public class GameController {
     private Text newBest;
     @FXML
     private Text newGame;
+    @FXML
+    private Text reviveText;
 
 //    private Platform platform1 = new Platform(200, 45, 140, 455, firstPlatform);
 //    private Platform platform2 = new Platform(200, 77, 367, 455, secondPlatform);
@@ -149,7 +160,6 @@ public class GameController {
 
         stage.show();
     }
-
 
     public void switchToGameScreen(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameplayScreen.fxml"));
@@ -297,15 +307,37 @@ public class GameController {
                     });
                 }
                 else {
-                    Platform.runLater(() -> {
-                        gamePane.getChildren().remove(stick);
-                        fallDown();
-                        try {
-                            endGame();
-                        } catch (IOException e) {
-                            throw new RuntimeException(e);
-                        }
-                    });
+                    if (cherries < 3) {
+                        Platform.runLater(() -> {
+                            gamePane.getChildren().remove(stick);
+                            fallDown();
+                            try {
+                                endGame();
+                            } catch (IOException e) {
+                                throw new RuntimeException(e);
+                            }
+                        });
+                    }
+                    else {
+                        reviveText.setVisible(true);
+                        Platform.runLater(() -> {
+                            cherries -= 3;
+                            cherryScore.setText(String.valueOf(cherries));
+
+                            double bottomY = heroImage.getLayoutY() - heroImage.getFitHeight();
+                            heroImage.setLayoutY(bottomY + 10);
+                            heroImage.setScaleY(heroImage.getScaleY() * -1);
+
+                            isHeroFlipped = !isHeroFlipped;
+
+                            // Adjust the layoutY to keep the bottom part fixed
+                            fliptry.setScaleY(fliptry.getScaleY() * -1);
+                            fliptry.setLayoutY(-fliptry.getLayoutY() + fliptry.getFitHeight());
+                            moveAll();
+                            removeNotCapturedCherry();
+                        });
+                        reviveText.setVisible(false);
+                    }
                 }
             });
 
@@ -358,7 +390,7 @@ public class GameController {
     }
 
     private void spawnCherry() {
-        cherry.setLayoutX((secondPlatform.getLayoutX() + (firstPlatform.getLayoutX() + firstPlatform.getWidth()))/2);
+        cherry.setLayoutX((secondPlatform.getLayoutX() + (firstPlatform.getLayoutX() + firstPlatform.getWidth()))/2 - 10);
         cherry.setLayoutY(465);
         spawnedCherry = 1;
     }
