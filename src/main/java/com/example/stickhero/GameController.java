@@ -634,6 +634,26 @@ public class GameController {
         gamePane.requestFocus();
     }
 
+    public ImageView getHeroImage() {
+        return heroImage;
+    }
+
+    public Rectangle getFirstPlatform() {
+        return firstPlatform;
+    }
+
+    public Rectangle getSecondPlatform() {
+        return secondPlatform;
+    }
+
+    public Rectangle getThirdPlatform() {
+        return thirdPlatform;
+    }
+
+    public Line getStick() {
+        return stick;
+    }
+
     public void setMainWindow(Stage stage) {
         this.stage = stage;
     }
