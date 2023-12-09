@@ -12,9 +12,12 @@ import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.text.Font;
+import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -44,6 +47,7 @@ public class GameController {
     private Score score = new Score();
     private int spawnedCherry = 0;
     private int finalscore;
+    private static int highScore;
     Random random = new Random();
     @FXML
     private ImageView heroImage;
@@ -62,6 +66,8 @@ public class GameController {
     @FXML
     private AnchorPane gamePane;
     @FXML
+    private AnchorPane gameOverPane;
+    @FXML
     private Rectangle newFirst;
     @FXML
     private Rectangle newSecond;
@@ -77,11 +83,13 @@ public class GameController {
     @FXML
     private Text scoreText = new Text(Integer.toString(score.getPoints()));
     @FXML
-    private Text gameScore = new Text("Integer.toString(score.getPoints())");
+    private Text gameScore = new Text(Integer.toString(0));
     @FXML
-    private Text bestScore = new Text(Integer.toString(score.getPoints()));
+    private Text bestScore = new Text(Integer.toString(highScore));
     @FXML
-    private ImageView cherryimage;
+    private Text newBest;
+    @FXML
+    private Text newGame;
 
 //    private Platform platform1 = new Platform(200, 45, 140, 455, firstPlatform);
 //    private Platform platform2 = new Platform(200, 77, 367, 455, secondPlatform);
@@ -104,11 +112,34 @@ public class GameController {
     }
     private void switchToGameOverScreen() throws IOException {
         root = FXMLLoader.load(getClass().getResource("GameOverScreen.fxml"));
-        //stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("GameOverScreen.fxml"));
+        Parent root = loader.load();
+        this.gameOverPane = (AnchorPane) root;
+
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setMaxWidth(410);
-        gameScore.setText(String.valueOf(finalscore));
+
+        // Create new labels with the same properties as gameScore and bestScore
+        newGame = new Text(String.valueOf(score.getPoints()));
+        newBest = new Text(String.valueOf(highScore));
+
+        newGame.setFont(Font.font("Arial", FontWeight.BOLD, 28));
+        newGame.setFill(Color.WHITE);
+        newGame.setLayoutX(190);
+        newGame.setLayoutY(253);
+
+        newBest.setFont(Font.font("Arial", FontWeight.BOLD, 28));
+        newBest.setFill(Color.WHITE);
+        newBest.setLayoutX(190);
+        newBest.setLayoutY(381);
+
+        // Replace old labels with new ones in the scene
+        gameOverPane.getChildren().removeAll(gameScore, bestScore);
+        gameOverPane.getChildren().addAll(newGame, newBest);
+        gameScore = newGame;
+        bestScore = newBest;
+
         stage.show();
     }
 
@@ -236,7 +267,9 @@ public class GameController {
                         heroImage.setLayoutX(finalNewX);
 
                         if (isHeroFlipped && spawnedCherry == 1 && finalNewX + 10 > cherry.getLayoutX()) {
-
+                            score.increasePoints();
+                            scoreText.setText(String.valueOf(score.getPoints()));
+                            gameScore.setText(String.valueOf(score.getPoints()));
                             removeCherry();
                         }
                     });
@@ -251,7 +284,10 @@ public class GameController {
 
                 // After reaching the destination, trigger moveAll()
                 if (!forceStopThread) {
-                    Platform.runLater(this::moveAll);
+                    Platform.runLater(() -> {
+                        moveAll();
+                        removeNotCapturedCherry();
+                    });
                 }
                 else {
                     Platform.runLater(() -> {
@@ -335,11 +371,25 @@ public class GameController {
         cherries++;
         cherryScore.setText(String.valueOf(cherries));
         spawnedCherry = 0;
+    }
 
+    private void removeNotCapturedCherry() {
+        newCherry = new ImageView(cherry.getImage());
+        newCherry.setLayoutX(420);
+        newCherry.setLayoutY(115);
+        newCherry.setFitWidth(cherry.getFitWidth());
+        newCherry.setFitHeight(cherry.getFitHeight());
+        newCherry.setPreserveRatio(cherry.isPreserveRatio());
+        newCherry.setSmooth(cherry.isSmooth());
+        newCherry.setCache(cherry.isCache());
+        gamePane.getChildren().remove(cherry);
+        gamePane.getChildren().add(newCherry);
+        cherry = newCherry;
+        cherryScore.setText(String.valueOf(cherries));
+        spawnedCherry = 0;
     }
 
     public void finalgame() throws IOException {
-        System.out.println(score.getPoints());
         finalscore=score.getPoints();
         switchToGameOverScreen();
     }
@@ -390,6 +440,9 @@ public class GameController {
 
 
     public void fallDown() {
+        if (score.getPoints() > highScore) {
+            this.highScore = score.getPoints();
+        }
         RotateTransition rotateTransition = new RotateTransition(Duration.seconds(3), heroImage);
 
         rotateTransition.setByAngle(720);
