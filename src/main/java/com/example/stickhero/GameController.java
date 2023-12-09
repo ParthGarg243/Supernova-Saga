@@ -15,17 +15,25 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.shape.StrokeLineCap;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Random;
 
 public class GameController {
     private Stage stage;
     private Scene scene;
     private Parent root;
+    private int score = 0;
+    private double stickLength;
+    private long startTime;
+    private static final double INCREASE_AMOUNT = 1.0;
+    private static final long INCREASE_INTERVAL = 25; // milliseconds
+    private int isMousePressed = 0;
+    private int canFlip = 0;
+    private double newWidth;
+    private double newLayoutX;
     @FXML
     private ImageView heroImage;
     @FXML
@@ -46,19 +54,13 @@ public class GameController {
     private Rectangle newThird;
     @FXML
     private Line newStick;
-    private ArrayList<Platform> platformArrayList=new ArrayList<>();
+    @FXML
+    private Text scoreText = new Text(Integer.toString(score));
 
 //    private Platform platform1 = new Platform(200, 45, 140, 455, firstPlatform);
 //    private Platform platform2 = new Platform(200, 77, 367, 455, secondPlatform);
 //    private Platform platform3 = new Platform(200, 98, 611, 455, thirdPlatform);
 //    private final Hero myHero = new Hero(60, 45, 140, 400, heroImage);
-    double stickLength;
-    private long startTime;
-    private static final double INCREASE_AMOUNT = 1.0;
-    private static final long INCREASE_INTERVAL = 25; // milliseconds
-    private int isMousePressed = 0;
-    private double newWidth;
-    private double newLayoutX;
 
     public void switchToStartScreen(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("HomePage.fxml"));
@@ -188,7 +190,9 @@ public class GameController {
             });
         }
 
+        canFlip = 1;
         translateTransition.play();
+        canFlip = 0;
     }
 
     public void endGame() {
