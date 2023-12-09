@@ -58,6 +58,11 @@ public class GameController {
     @FXML
     private Text scoreText = new Text(Integer.toString(score.getPoints()));
     @FXML
+    private Text gameScore = new Text(Integer.toString(score.getPoints()));
+    private int finalscore;
+    @FXML
+    private Text bestScore = new Text(Integer.toString(score.getPoints()));
+    @FXML
     private ImageView cherryimage;
 
 //    private Platform platform1 = new Platform(200, 45, 140, 455, firstPlatform);
@@ -80,6 +85,7 @@ public class GameController {
         scene = new Scene(root);
         stage.setScene(scene);
         stage.setMaxWidth(410);
+        gameScore.setText(String.valueOf(finalscore));
         stage.show();
     }
 
@@ -215,6 +221,7 @@ public class GameController {
         p1.setToY(460);
         p2.setToY(460);
         p3.setToY(460);
+
         p3.setOnFinished(event -> {
             try {
                 finalgame();
@@ -231,7 +238,10 @@ public class GameController {
 
     }
     public void finalgame() throws IOException {
+        System.out.println(score.getPoints());
+        finalscore=score.getPoints();
         switchToGameOverScreen();
+
     }
 
     public void moveAll() {
