@@ -103,6 +103,13 @@ public class GameController {
         stage.setScene(scene);
         stage.show();
     }
+    public void switchToInstructionScreen(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("instructionScreen.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
     public void switchToPauseScreen(ActionEvent event) throws IOException {
         root = FXMLLoader.load(getClass().getResource("PauseScreen.fxml"));
         stage = (Stage)((Node)event.getSource()).getScene().getWindow();
