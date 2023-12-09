@@ -68,6 +68,14 @@ public class GameController {
         stage.show();
     }
 
+    public void switchToGameOverScreen(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("GameOverScreen.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
+
     public void switchToGameScreen(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameplayScreen.fxml"));
         Parent root = loader.load();
@@ -173,11 +181,27 @@ public class GameController {
         translateTransition.setOnFinished(event -> moveAll());
 
         if (flag == 1) {
-            translateTransition.setOnFinished(event -> moveDown());
+            translateTransition.setOnFinished(event -> {
+                gamePane.getChildren().remove(stick);
+                fallDown();
+                endGame();
+            });
         }
 
-        // Play the translation animation
         translateTransition.play();
+    }
+
+    public void endGame() {
+        TranslateTransition p1 = new TranslateTransition(Duration.seconds(3), firstPlatform);
+        TranslateTransition p2 = new TranslateTransition(Duration.seconds(3), secondPlatform);
+        TranslateTransition p3 = new TranslateTransition(Duration.seconds(3), thirdPlatform);
+        p1.setToY(460);
+        p2.setToY(460);
+        p3.setToY(460);
+        p1.play();
+        p2.play();
+        p3.play();
+
     }
 
     public void moveAll() {
@@ -218,7 +242,7 @@ public class GameController {
         });
     }
 
-    public void moveDown() {
+    public void fallDown() {
         RotateTransition rotateTransition = new RotateTransition(Duration.seconds(3), heroImage);
 
         rotateTransition.setByAngle(720);
