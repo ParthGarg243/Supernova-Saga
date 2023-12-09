@@ -21,14 +21,14 @@
             <Image url="@images/star.png" />
          </image>
       </ImageView>
-      <ImageView fitHeight="47.0" fitWidth="21.0" layoutX="370.0" layoutY="30.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fitHeight="47.0" fitWidth="21.0" layoutX="365.0" layoutY="37.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/pause.png" />
          </image>
       </ImageView>
       <Rectangle fx:id="firstPlatform" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="45.0" />
 <!--      PAUSE BUTTON NOT WORKING ON GETTING CLICKED-->
-      <Button fx:id="pausebutton" layoutX="370.0" layoutY="31.0" mnemonicParsing="false" onAction="#switchToStartScreen" opacity="0.0" prefHeight="26.0" prefWidth="31.0" />
+      <Button fx:id="pausebutton" layoutX="365.0" layoutY="41.0" mnemonicParsing="false" onAction="#switchToPauseScreen" opacity="0.0" prefHeight="26.0" prefWidth="31.0" />
       <ImageView fx:id="heroImage" fitHeight="60.0" fitWidth="45.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Hero.png" />
@@ -37,14 +37,14 @@
       <Rectangle fx:id="secondPlatform" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="186.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="77.0" />
       <Rectangle fx:id="thirdPlatform" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="421.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="98.0" />
       <Line fx:id="stick" endY="-10.0" layoutX="44.0" layoutY="455.0" strokeLineCap="ROUND" strokeWidth="3.0" />
-      <Text fx:id="scoreText" fill="WHITE" layoutX="167.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="70.5999755859375">
+      <Text fx:id="scoreText" fill="WHITE" layoutX="170.0" layoutY="106.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="70.5999755859375">
          <font>
-            <Font name="Baskerville Old Face" size="43.0" />
+            <Font name="Baskerville Old Face" size="64.0" />
          </font>
       </Text>
-      <ImageView fx:id="cherryimage" fitHeight="43.0" fitWidth="31.0" layoutX="426.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="cherryimage" fitHeight="43.0" fitWidth="39.0" layoutX="14.0" layoutY="28.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@images/star.png" />
+            <Image url="@images/cherry.png" />
          </image>
       </ImageView>
       <ImageView fx:id="cherry" fitHeight="25.0" fitWidth="25.0" layoutX="419.0" layoutY="112.0" pickOnBounds="true" preserveRatio="true">
@@ -52,5 +52,10 @@
             <Image url="@images/cherry.png" />
          </image>
       </ImageView>
+      <Text fx:id="cherryScore" fill="WHITE" layoutX="58.0" layoutY="59.0" strokeType="OUTSIDE" strokeWidth="0.0" text="XX">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Text>
    </children>
 </AnchorPane>

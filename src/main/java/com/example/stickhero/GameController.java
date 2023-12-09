@@ -32,6 +32,8 @@ public class GameController {
     private boolean isSpaceBarPressed = false;
     private boolean isHeroFlipped = false;
     private boolean forceStopThread = false;
+    @FXML
+    private Text cherryScore;
     private static final double INCREASE_AMOUNT = 1.0;
     private static final long INCREASE_INTERVAL = 25; // milliseconds
     private int isMousePressed = 0;
@@ -93,7 +95,13 @@ public class GameController {
         stage.setScene(scene);
         stage.show();
     }
-
+    public void switchToPauseScreen(ActionEvent event) throws IOException {
+        root = FXMLLoader.load(getClass().getResource("PauseScreen.fxml"));
+        stage = (Stage)((Node)event.getSource()).getScene().getWindow();
+        scene = new Scene(root);
+        stage.setScene(scene);
+        stage.show();
+    }
     private void switchToGameOverScreen() throws IOException {
         root = FXMLLoader.load(getClass().getResource("GameOverScreen.fxml"));
         //stage = (Stage)((Node)event.getSource()).getScene().getWindow();
@@ -103,6 +111,7 @@ public class GameController {
         gameScore.setText(String.valueOf(finalscore));
         stage.show();
     }
+
 
     public void switchToGameScreen(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(getClass().getResource("GameplayScreen.fxml"));
@@ -204,6 +213,8 @@ public class GameController {
         if (((-1) * stick.getEndY() >= lowerBound) && ((-1) * stick.getEndY() <= upperBound)) {
             destinationX = secondPlatform.getLayoutX();
             score.increasePoints();
+            scoreText.setText(String.valueOf(score.getPoints()));
+            gameScore.setText(String.valueOf(score.getPoints()));
 
             // Use Thread for smooth movement
             double startX = 0;
@@ -225,6 +236,7 @@ public class GameController {
                         heroImage.setLayoutX(finalNewX);
 
                         if (isHeroFlipped && spawnedCherry == 1 && finalNewX + 10 > cherry.getLayoutX()) {
+
                             removeCherry();
                         }
                     });
@@ -321,7 +333,9 @@ public class GameController {
         gamePane.getChildren().add(newCherry);
         cherry = newCherry;
         cherries++;
+        cherryScore.setText(String.valueOf(cherries));
         spawnedCherry = 0;
+
     }
 
     public void finalgame() throws IOException {
