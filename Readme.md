@@ -29,7 +29,7 @@ Swarnima Prasad (2022525)
         - Used for creating instances of objects with image views.
 
 5. *Revive Feature:*
-    - If the player collects at least 3 cherries, a revive feature is activated for the character.
+    - If the player collects at least 3 stars, a revive feature is activated for the character.
 
 6. *Choose Your Character:*
     - Bonus feature allowing players to choose their own hero character.
@@ -38,7 +38,8 @@ Swarnima Prasad (2022525)
     - Provides players with instructions on how to play the game.
 
 8. *Scoring System:*
-    - Each collected cherry increases the player's score by one point.
+    - Each collected star increases the player's score by one point. 
+    - Each successful travel increases the player's score by one point.
 
 9. *Serialization:*
     - Serializable interface used for storing an array of saved games for future use.
