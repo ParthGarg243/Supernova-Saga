@@ -7,8 +7,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.animation.ScaleTransition;
+
 import javafx.scene.Scene;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.shape.Line;
@@ -28,6 +31,7 @@ public class GameController {
     //private int score = 0;
     private double stickLength;
     private long startTime;
+    private boolean isSpaceBarPressed = false;
     private static final double INCREASE_AMOUNT = 1.0;
     private static final long INCREASE_INTERVAL = 25; // milliseconds
     private int isMousePressed = 0;
@@ -36,6 +40,8 @@ public class GameController {
     private double newLayoutX;
     @FXML
     private ImageView heroImage;
+    @FXML
+    private ImageView fliptry;
     @FXML
     private Rectangle firstPlatform;
     @FXML
@@ -55,10 +61,11 @@ public class GameController {
     @FXML
     private Line newStick;
     private Score score=new Score();
+
     @FXML
     private Text scoreText = new Text(Integer.toString(score.getPoints()));
     @FXML
-    private Text gameScore = new Text(Integer.toString(score.getPoints()));
+    private Text gameScore = new Text("Integer.toString(score.getPoints())");
     private int finalscore;
     @FXML
     private Text bestScore = new Text(Integer.toString(score.getPoints()));
@@ -125,6 +132,7 @@ public class GameController {
         isMousePressed = 0;
         rotateStickAndMoveHero();
     }
+
 
     private void increaseLengthLoop() {
         stickLength = 10;
@@ -274,10 +282,10 @@ public class GameController {
         p3.setToY(0);
 
         //long bound= (long) ((410 - newLayoutX)-(long) secondPlatform.getLayoutX());
-        //Random cherryPosition=new Random(bound);
-        TranslateTransition c = new TranslateTransition(Duration.seconds(2), cherryimage);
-
-        //c.setToX(c.ge+(-(410 - newLayoutX))+40);
+        //double cherryPosition=thirdPlatform.getLayoutX()-(secondPlatform.getLayoutX();
+       // TranslateTransition c = new TranslateTransition(Duration.seconds(0.001), cherryimage);
+        //c.setToX(-(400 - newLayoutX));
+        //c.setToX(-(cherryimage.getLayoutY()+(-(410 - newLayoutX))));
         //c.setToY(0);
         //cherryimage.setLayoutX(-(410 - newLayoutX));
         //cherryimage.setLayoutY(403);
@@ -286,7 +294,8 @@ public class GameController {
         p1.play();
         p2.play();
         p3.play();
-        c.play();
+
+        //c.play();
 
         p3.setOnFinished(event -> {
             changePlatformsAndUpdateStick();
@@ -310,8 +319,24 @@ public class GameController {
     }
 
     public void flipHero(){
-        heroImage.setScaleY(-1);
-        heroImage.setLayoutY(heroImage.getLayoutY() + heroImage.getFitHeight() );
+        if (isSpaceBarPressed) {
+            //System.out.println(fliptry.getLayoutY());
+
+            double bottomY = heroImage.getLayoutY() + heroImage.getFitHeight();
+            heroImage.setLayoutY(bottomY );
+            heroImage.setScaleY(heroImage.getScaleY() * -1);
+            //System.out.println(fliptry.getLayoutY());
+            // Adjust the layoutY to keep the bottom part fixed
+
+
+            //System.out.println(fliptry.getLayoutY());
+            //System.out.println(fliptry.getLayoutY());
+            fliptry.setScaleY(fliptry.getScaleY() * -1);
+            //System.out.println(fliptry.getLayoutY());
+            // Adjust the layoutY to keep the bottom part fixed
+            fliptry.setLayoutY(-fliptry.getLayoutY()+fliptry.getFitHeight() );
+            //System.out.println(fliptry.getLayoutY());
+        }
     }
 
     public void changePlatformsAndUpdateStick(){
@@ -333,7 +358,8 @@ public class GameController {
         newThird = new Rectangle(newWidth, thirdPlatform.getHeight());
         newThird.setLayoutX(410);
         newThird.setLayoutY(thirdPlatform.getLayoutY());
-
+        //TranslateTransition c = new TranslateTransition(Duration.seconds(2), cherryimage);
+       // cherryimage.setLayoutX(40-thirdPlatform.getLayoutX());
         gamePane.getChildren().removeAll(firstPlatform, secondPlatform, thirdPlatform);
         gamePane.getChildren().addAll(newFirst, newSecond, newThird);
 
@@ -361,6 +387,25 @@ public class GameController {
     public void initializeGame() {
         gamePane.setOnMousePressed(this::handleMousePressed);
         gamePane.setOnMouseReleased(this::handleMouseReleased);
+
+
+        gamePane.setOnKeyPressed(event -> {
+            if (event.getCode() == KeyCode.SPACE) {
+                isSpaceBarPressed = true;
+                flipHero();
+            }
+        });
+
+        // Add key released event handler for the space bar
+        gamePane.setOnKeyReleased(event -> {
+            if (event.getCode() == KeyCode.SPACE) {
+                isSpaceBarPressed = false;
+            }
+        });
+
+        // Request focus to make sure key events are captured
+        gamePane.requestFocus();
+
     }
 
     public void setMainWindow(Stage stage) {

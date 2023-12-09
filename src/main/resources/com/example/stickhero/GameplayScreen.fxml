@@ -42,9 +42,14 @@
             <Font name="Baskerville Old Face" size="43.0" />
          </font>
       </Text>
-      <ImageView fx:id="cherryimage" fitHeight="43.0" fitWidth="31.0" layoutX="136.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
+      <ImageView fx:id="cherryimage" fitHeight="43.0" fitWidth="31.0" layoutX="426.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/star.png" />
+         </image>
+      </ImageView>
+      <ImageView fx:id="fliptry" fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/Hero.png" />
          </image>
       </ImageView>
    </children>
