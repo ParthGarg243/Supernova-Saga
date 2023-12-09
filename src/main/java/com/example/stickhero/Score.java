@@ -26,6 +26,7 @@ public class Score{
     }
 
     public void increasePoints() {
+        this.points+=1;
     }
 
     public void increaseTime() {

@@ -6,6 +6,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.shape.Rectangle?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane fx:id="gamePane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" onMousePressed="#handleMousePressed" onMouseReleased="#handleMouseReleased" prefHeight="650.0" prefWidth="643.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.stickhero.GameController">
    <children>
@@ -26,7 +28,7 @@
       </ImageView>
       <Rectangle fx:id="firstPlatform" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="45.0" />
 <!--      PAUSE BUTTON NOT WORKING ON GETTING CLICKED-->
-      <Button layoutX="370.0" layoutY="31.0" mnemonicParsing="false" onAction="#switchToGameScreen" opacity="0.0" prefHeight="26.0" prefWidth="31.0" />
+      <Button fx:id="pausebutton" layoutX="370.0" layoutY="31.0" mnemonicParsing="false" onAction="#switchToStartScreen" opacity="0.0" prefHeight="26.0" prefWidth="31.0" />
       <ImageView fx:id="heroImage" fitHeight="60.0" fitWidth="45.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@images/Hero.png" />
@@ -35,5 +37,15 @@
       <Rectangle fx:id="secondPlatform" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="186.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="77.0" />
       <Rectangle fx:id="thirdPlatform" arcHeight="5.0" arcWidth="5.0" height="200.0" layoutX="421.0" layoutY="455.0" stroke="BLACK" strokeType="INSIDE" strokeWidth="0.0" width="98.0" />
       <Line fx:id="stick" endY="-10.0" layoutX="44.0" layoutY="455.0" strokeLineCap="ROUND" strokeWidth="3.0" />
+      <Text fx:id="scoreText" fill="WHITE" layoutX="167.0" layoutY="44.0" strokeType="OUTSIDE" strokeWidth="0.0" text="0" textAlignment="CENTER" wrappingWidth="70.5999755859375">
+         <font>
+            <Font name="Baskerville Old Face" size="43.0" />
+         </font>
+      </Text>
+      <ImageView fx:id="cherryimage" fitHeight="43.0" fitWidth="31.0" layoutX="136.0" layoutY="403.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@images/star.png" />
+         </image>
+      </ImageView>
    </children>
 </AnchorPane>

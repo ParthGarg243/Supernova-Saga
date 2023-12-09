@@ -1,8 +1,6 @@
 package com.example.stickhero;
 
-import javafx.animation.ParallelTransition;
-import javafx.animation.RotateTransition;
-import javafx.animation.TranslateTransition;
+import javafx.animation.*;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,12 +18,13 @@ import javafx.stage.Stage;
 import javafx.util.Duration;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class GameController {
     private Stage stage;
     private Scene scene;
     private Parent root;
-    private int score = 0;
+    //private int score = 0;
     private double stickLength;
     private long startTime;
     private static final double INCREASE_AMOUNT = 1.0;
@@ -54,8 +53,11 @@ public class GameController {
     private Rectangle newThird;
     @FXML
     private Line newStick;
+    private Score score=new Score();
     @FXML
-    private Text scoreText = new Text(Integer.toString(score));
+    private Text scoreText = new Text(Integer.toString(score.getPoints()));
+    @FXML
+    private ImageView cherryimage;
 
 //    private Platform platform1 = new Platform(200, 45, 140, 455, firstPlatform);
 //    private Platform platform2 = new Platform(200, 77, 367, 455, secondPlatform);
@@ -168,6 +170,7 @@ public class GameController {
 
         if (((-1) * stick.getEndY() >= lowerBound) && ((-1) * stick.getEndY() <= upperBound)) {
             destinationX = secondPlatform.getLayoutX();
+            score.increasePoints();
 
         }
         else {
@@ -188,6 +191,9 @@ public class GameController {
                 fallDown();
                 endGame();
             });
+        }
+        else {
+            scoreText.setText(Integer.toString(score.getPoints()));
         }
 
         canFlip = 1;
@@ -211,6 +217,7 @@ public class GameController {
     public void moveAll() {
         newWidth = Platform.generateWidth();
         newLayoutX = Platform.generateLayoutX();
+
         thirdPlatform.setWidth(newWidth);
 
         // Move hero
@@ -236,11 +243,21 @@ public class GameController {
         p3.setToX(-(410 - newLayoutX));
         p3.setToY(0);
 
+        //long bound= (long) ((410 - newLayoutX)-(long) secondPlatform.getLayoutX());
+        //Random cherryPosition=new Random(bound);
+        TranslateTransition c = new TranslateTransition(Duration.seconds(2), cherryimage);
+
+        //c.setToX(c.ge+(-(410 - newLayoutX))+40);
+        //c.setToY(0);
+        //cherryimage.setLayoutX(-(410 - newLayoutX));
+        //cherryimage.setLayoutY(403);
         h.play();
         s.play();
         p1.play();
         p2.play();
         p3.play();
+        c.play();
+
         p3.setOnFinished(event -> {
             changePlatformsAndUpdateStick();
         });
@@ -256,7 +273,29 @@ public class GameController {
         translateTransition.setToY(655);
 
         ParallelTransition parallelTransition = new ParallelTransition(rotateTransition, translateTransition);
+        parallelTransition.setOnFinished(event -> {
+            try {
+                switchToGameOverScreen(null);
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
+        });
+
         parallelTransition.play();
+//        Duration delay=Duration.seconds(2);
+//
+//        Timeline timeline=new Timeline((new KeyFrame(delay,event -> {
+//            try {
+//                root=FXMLLoader.load(getClass().getResource("GameOverScreen.fxml"));
+//                stage=(Stage)((Node)event.getSource()).getScene().getWindow();
+//                scene=new Scene(root);
+//                stage.setScene(scene);
+//                stage.show();
+//            }catch (IOException i){
+//                System.out.println("IO excdeption");
+//            }
+  //      })));
+
     }
 
     public void flipHero(){
