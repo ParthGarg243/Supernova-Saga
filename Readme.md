@@ -1,10 +1,9 @@
 # Supernova Saga
 
-### Group 116
+Modified Clone of Stick Hero in Java made as a part of the course project for CSE201: Advanced Programming course conducted in Monsoon 2023 at IIIT Delhi by Group 116
 
 ## Team Members:
 Parth Garg (2022351)
-
 Swarnima Prasad (2022525)
 
 ## Features
@@ -54,11 +53,3 @@ Swarnima Prasad (2022525)
 3. Release the mouse to move the hero. Aim to land on platforms.
 4. Use the space bar to perform flips.
 5. Collect cherries to increase your score and unlock the revive feature.
-
-# UML Diagram
-
-![Use Case Diagram](umlDiagram.png)
-
-# Use Case Diagram
-
-![Use Case Diagram](UseCaseDiagram.png)
