@@ -4,6 +4,7 @@ Modified Clone of Stick Hero in Java made as a part of the course project for CS
 
 ## Team Members:
 Parth Garg (2022351)
+
 Swarnima Prasad (2022525)
 
 ## Features
